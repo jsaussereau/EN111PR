@@ -42,6 +42,28 @@ Il y a 3 dossiers principaux :
 - Ajout d'une alarme quand l'horloge atteint une heure configurée, avec une sonnerie ou une mélodie sur le buzzer P1.
 - Toute autre idée que vous aimeriez développer avec les éléments à disposition sur la carte.
 
+
+## Évaluation
+À rendre par mail à [jsaussereau@bordeaux-inp.fr](mailto:jsaussereau@bordeaux-inp.fr?subject=[EN111]%20NOM1%20NOM2) avec comme objet `[EN111] NOM1 NOM2`, **avant le lundi 31 mai 2021 à 23h59** :
+- Un rapport par binôme, d'environ 10 pages (hors annexe), au format `.pdf`, contenant :
+	- Une introduction du contexte en résumant le cahier des charges et en présentant les ressources utiles de la carte.
+	- La configuration des modules du PIC utilisés : 
+		- Quels sont les registres utilisés ?
+		- Quelles sont les valeurs qui ont été mises dans ces registres ?
+		- Quelles actions ont ces valeurs techniquement ? 
+		- Quelles sont les fonctionnalités recherchées qui justifient ces valeurs ?
+		- Comment ont été codés les lectures/écritures dans les registres (écriture directe dans tout le registre, écriture individuellement dans chaque bit, masquage, utilisation des champs de bits, ...) et les raisons de ces choix.
+	- Les organigrammes indiquant le déroulement du programme principal et des fonctions gérant l'afficheur (uniquement pour les fonctions lcd_init et lcd_write_instr). Ils seront accompagnés d'explications nécessaires et suffisantes à leur compréhension. Bien faire apparaître, et justifier, ce qui est effectué par interruption et ce qui ne l'est pas.
+- Le code source (tous les fichiers `.c` et `.h` dans le dossier `/src`) compressés dans une archive `.zip`
+
+***Nota bene.*** :
+1. Le code source doit compiler !
+2. La note qui vous sera attribuée sur ce module tient également compte du travail observé durant les séances de TP + projet et des éventuelles absences non justifiées.
+3. Le [plagiat](https://www.bordeaux-inp.fr/extranet/fr/system/files/users/mhans100p/charte_plagiat_0.pdf) constitue une fraude dont les conséquences peuvent être graves :
+attribution d’une note de zéro au travail incriminé, exclusion de l’établissement, exclusion définitive de tout établissement d’enseignement supérieur français.  
+En matière de propriété intellectuelle, le plagiat constitue un délit.
+
+
 ## Aide
 <h3 id="aide_led"> 1. Clignotement de la LED à la fréquence 0.5 Hz </h3>
 
@@ -105,7 +127,7 @@ void lcd_write_instr_8bits(unsigned char rs, unsigned char rw, unsigned char dat
     RW = rw;
     
     LCD &= 0xf0; // mise à 0 des 4 bits de poids faible  
-    LCD |= (data_MSB & 0x0f); // mise à 0 des 4 bits de poids faible  
+    LCD |= (data_MSB & 0x0f); // application des 4 MSB de la donnée sur les 4 LSB de LCD 
     
     E = E_ENABLED;
     // [...]
@@ -152,7 +174,7 @@ void lcd_write_instr_8bits(unsigned char operation, unsigned char data) {
     // [...]
     LCDbits.OPERATION = operation; 
     LCDbits.DB = data_MSB;
-    LCDbits.E = ON;
+    LCDbits.E = E_ENABLED;
     // [...]
 }
 ```
