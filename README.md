@@ -18,7 +18,7 @@ Il y a 3 dossiers principaux :
 ### Objectifs principaux :
 - Faire clignoter une des LED à la fréquence 0.5 Hz (1 changement d'état toutes les secondes) à partir d'**interruptions** sur le Timer1. Cette fonctionnalité doit être maintenue même après le développement des étapes suivantes.   
 ([Aide](#aide_led))
-- Développer une bibliothèque pour l'afficheur LCD (`lib_LCD.h` et `lib_LCD.c`)` proposant à l'utilisateur au minimum les fonctionnalités suivantes :
+- Développer une bibliothèque pour l'afficheur LCD (`lib_LCD.h` et `lib_LCD.c`) proposant à l'utilisateur au minimum les fonctionnalités suivantes :
 	- `lcd_init` : Initialisation générale de l'afficheur en mode 4 bits
 	- `lcd_putch` : Ecriture d'un caractère sur l'afficheur
 	- `lcd_puts` : Ecriture d'une chaîne de caractères sur l'afficheur
