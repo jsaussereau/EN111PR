@@ -28,7 +28,7 @@ void init() {
     
 }
 
-
+// ne pas oublier d'ajouter ce qui a été fait dans test_led.c
 void main() { 
     init();
     

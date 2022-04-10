@@ -28,7 +28,8 @@ void init() {
     
 }
 
-
+// main pour la première partie, avec le timer uniquement
+// pour la deuxième partie, désactiver test_led.c et utiliser test_LCD.c
 void main() { 
     init();
     
