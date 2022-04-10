@@ -17,6 +17,8 @@
 // LIBRARIES
 #include <xc.h>	
 #include <stdio.h>	
+#include "horloge.h"
+#include "lib_LCD.h"
 
 
 void interrupt IT() {	  
