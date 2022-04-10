@@ -44,7 +44,7 @@ Il y a 3 dossiers principaux :
 
 
 ## Évaluation
-À rendre par mail à [jsaussereau@bordeaux-inp.fr](mailto:jsaussereau@bordeaux-inp.fr?subject=[EN111]%20NOM1%20NOM2) avec comme objet `[EN111] NOM1 NOM2`, avant le *<date à définir>** à 23h59** :
+À rendre par mail à [jsaussereau@bordeaux-inp.fr](mailto:jsaussereau@bordeaux-inp.fr?subject=[EN111]%20NOM1%20NOM2) avec comme objet `[EN111] NOM1 NOM2`, avant le *<date à définir>* à 23h59 :
 - Un rapport par binôme, d'environ 10 pages (hors annexe), au format `.pdf`, contenant :
 	- Une introduction du contexte en résumant le cahier des charges et en présentant les ressources utiles de la carte.
 	- La configuration des modules du PIC utilisés : 
@@ -65,9 +65,22 @@ En matière de propriété intellectuelle, le plagiat constitue un délit.
 
 
 ## Aide
-<h3 id="aide_led"> 1. Clignotement de la LED à la fréquence 0.5 Hz </h3>
+<h3 id="aide_get_started"> 1. Get started </h3>
 
-#### 1.1 Configuration du timer
+Un projet déjà configuré est disponible dans `/work`.
+
+Un cetain nombre de fichiers sont déjà créés dans le dossier `/src` :
+- `test_led.c` : Fichier principal pour développer [la première partie liée au timer](#aide_led)
+- `test_LCD.c` : Fichier principal à utiliser pour la suite du projet après la première partie validée. C'est ici que seront appelées les **fonctions utilisateur** de [la bibliothèque LCD](#aide_lib_lcd) que vous allez développer. Ne pas oublier de commencer par y ajouter ce que vous avez fait dans test_led.c, et bien sûr de désactiver test_led.c et activer test_LCD.c.
+- `lib_LCD.c` et `lib_LCD.h` : Fichiers où développer [la bibliothèque LCD](#aide_lib_lcd) à proprement parler.
+- `horloge.c` et `horloge.h` : Fichiers où développer [la mise en forme](#aide_horloge) et [la configuration](#aide_conf_horloge) de l'horloge.
+- `lib_i2c.c` et `lib_i2c.h` : Fichiers où développer la partie optionnelle sur la récupération de la température du capteur TC74.
+	
+À chaque étape, pensez à faire valider votre travail avant de passer aux étapes suivantes.
+
+<h3 id="aide_led"> 2. Clignotement de la LED à la fréquence 0.5 Hz </h3>
+
+#### 2.1 Configuration du timer
 
 Pour générer une horloge de fréquence 0.5 Hz précisément, on utilise le Timer 1. La section Timer1 de la datasheet du microcontrôleur *DS_PIC16F877A* détaille son fonctionnement et les registres à utiliser pour le configurer.
 
@@ -77,7 +90,7 @@ Pour pouvoir faire une action à chaque débordement, il faut activer les interr
 
 ***Note*** : Le tableau à la page 60 de la datasheet *DS_PIC16F877A* met en évidence tous les champs liés au Timer1. Pour être sûr de l'avoir bien configuré, il faut être sûr de comprendre quel est le rôle de chacun de ces champs et être sûr d'avoir assigné la bonne valeur aux champs qui en ont besoin.
 
-#### 1.2 Configuration du module CCP
+#### 2.2 Configuration du module CCP
 
 Pour avoir un débordement toutes les secondes (et pas toutes les 2 secondes), on peut utiliser un module de comparaison CCP.  
 Le but est ici d'utiliser ce module pour générer une interruption à chaque fois que la valeur du compteur du Timer1 est à mi-parcours (entre deux interruptions de débordement). Il faut donc également activer les interruptions sur module CCP.  
@@ -88,7 +101,7 @@ Il faut aussi penser à bien mettre une valeur à comparer
 
 
 
-<h3 id="aide_lib_lcd"> 2. Développement de la bibliothèque pour l'afficheur LCD </h3>
+<h3 id="aide_lib_lcd"> 3. Développement de la bibliothèque pour l'afficheur LCD </h3>
 
 #### Documentation
 Pour développer la bibliothèque LCD, 3 documents seront utiles :
@@ -224,11 +237,11 @@ Plutôt que d'envoyer les instructions avec les données brutes dans cette proc�
 
 Il ne manque alors plus qu'à réaliser les fonctions pour écrire un caractère `lcd_putch`, puis une pour écrire une chaîne de caractères `lcd_puts` et une fonction de positionnement sur l'écran `lcd_pos`.
 
-<h3 id="aide_horloge"> 3. Affichage de l'horloge sur l'écran LCD </h3>
+<h3 id="aide_horloge"> 4. Affichage de l'horloge sur l'écran LCD </h3>
 
 Pour formatter l'horloge dans une chaîne de caractère, le plus simple est certainement d'utiliser la fonction `sprintf` de la bibliothèque `stdio`.
 
-<h3 id="aide_conf_horloge"> 4. Développement de la fonctionnalité de configuration de l'horloge </h3>
+<h3 id="aide_conf_horloge"> 5. Développement de la fonctionnalité de configuration de l'horloge </h3>
 
 Pour cette partie, il est nécessaire de développer une machine d'état, avec une filtre anti-rebond (à base de temporisation active) sur les boutons. 
 
