@@ -6,6 +6,13 @@ Appuyer sur
 <a class="bg-green-light mb-2">  **↓ Code** </a>
 puis **Download ZIP**
 
+ou dans un terminal :
+
+```bash
+cd ~/Documents/
+git clone https://github.com/jsaussereau/EN111PR.git
+```
+
 ## Organisation du répertoire
 Extraire l'archive sur la session dans **Documents**.
 
