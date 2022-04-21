@@ -91,7 +91,7 @@ Un cetain nombre de fichiers sont déjà créés dans le dossier `/src` :
 
 Pour générer une horloge de fréquence 0.5 Hz précisément, on utilise le Timer 1. La section Timer1 de la datasheet du microcontrôleur *DS_PIC16F877A* détaille son fonctionnement et les registres à utiliser pour le configurer.
 
-Il est possible de configurer le timer 1 sur une horloge externe. La carte PICDEM2+ intègre un quartz de 32,768 kHz relié aux broches OSO (RC0) et OSI (RC1) du PIC. Ceci permet une incrémentation du TIMER1 et un débordement de celui-ci toutes les 2 secondes (216/32768) très précisément.
+Il est possible de configurer le timer 1 sur une horloge externe. La carte PICDEM2+ intègre un quartz de 32,768 kHz relié aux broches OSO (RC0) et OSI (RC1) du PIC. Ceci permet une incrémentation du TIMER1 et un débordement de celui-ci toutes les 2 secondes (2^16 / 32768) très précisément.
 
 Pour pouvoir faire une action à chaque débordement, il faut activer les interruptions sur les débordements du Timer1.
 
