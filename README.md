@@ -111,10 +111,9 @@ Il faut aussi penser à bien mettre une valeur à comparer
 <h3 id="aide_lib_lcd"> 3. Développement de la bibliothèque pour l'afficheur LCD </h3>
 
 #### Documentation
-Pour développer la bibliothèque LCD, 3 documents seront utiles :
+Pour développer la bibliothèque LCD, 2 documents seront utiles :
 - *DS_PICDEM_2_Plus_Users_Guide* : Datasheet de la carte de développement. Le schéma électrique page 19 permet de comprendre les interconnexions entre le microcontrôleur et le module LCD.
-- *DS_LCD_Module_162F* : Datasheet de l'écran. Les pages 3 et 4 montrent les chronogrammes à respecter pendant une lecture/écriture.
-- *DS_Afficheurs_Sunplus* : Datasheet du module LCD complet. On y trouve une description de toutes les fonctions proposées par le module. Toutes les instructions y sont détaillées.
+- *DS_Afficheurs_Sunplus* : Datasheet du module LCD. On y trouve la description des entrées/sorties du module (page 4), ansi que les chronogrammes à respecter pour ces signaux (pages 23-24). Toutes les commandes proposées par le module y sont détaillées (pages 5-7). Enfin, la datasheet explicite la procédure d'initialisation du module (pages 10-11). 
 
 #### <ins>Étape 1</ins>  : Simplification des accès
 
