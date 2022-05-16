@@ -51,17 +51,37 @@ Il y a 3 dossiers principaux :
 
 
 ## Évaluation
-À rendre par mail à [jsaussereau@bordeaux-inp.fr](mailto:jsaussereau@bordeaux-inp.fr?subject=[EN111]%20NOM1%20NOM2) avec comme objet `[EN111] NOM1 NOM2`, avant le *<date à définir>* à 23h59 :
+À rendre par mail à [jsaussereau@bordeaux-inp.fr](mailto:jsaussereau@bordeaux-inp.fr?subject=[EN111]%20NOM1%20NOM2) (groupes D et E) avec comme objet `[EN111] NOM1 NOM2`, **avant le lundi 30 mai à 23h59** :
+- Le code source (tous les fichiers `.c` et `.h` dans le dossier `/src`) compressés dans une archive `.zip`
 - Un rapport par binôme, d'environ 10 pages (hors annexe), au format `.pdf`, contenant :
 	- Une introduction du contexte en résumant le cahier des charges et en présentant les ressources utiles de la carte.
-	- La configuration des modules du PIC utilisés : 
-		- Quels sont les registres utilisés ?
-		- Quelles sont les valeurs qui ont été mises dans ces registres ?
-		- Quelles actions ont ces valeurs techniquement ? 
-		- Quelles sont les fonctionnalités recherchées qui justifient ces valeurs ?
-		- Comment ont été codés les lectures/écritures dans les registres (écriture directe dans tout le registre, écriture individuellement dans chaque bit, masquage, utilisation des champs de bits, ...) et les raisons de ces choix.
-	- Les organigrammes indiquant le déroulement du programme principal et des fonctions gérant l'afficheur (uniquement pour les fonctions lcd_init et lcd_write_instr). Ils seront accompagnés d'explications nécessaires et suffisantes à leur compréhension. Bien faire apparaître, et justifier, ce qui est effectué par interruption et ce qui ne l'est pas.
-- Le code source (tous les fichiers `.c` et `.h` dans le dossier `/src`) compressés dans une archive `.zip`
+	- Une explication de la conception de chacune des parties du projet :
+		- Génération de l'interruption toutes les secondes
+			- Configuration du timer
+			- Configuration du module CCP
+		- Développement de la bibliothèque pour l'afficheur LCD 
+			- Simplification des accès
+			- Développement d'une fonction d'envoi de n'importe quelle commande
+			- Développement des fonctions correspondant aux différentes commandes
+			- Développement de la fonction d'initialisation
+			- Développement des fonctions utilisateur restantes
+		- Affichage de l'horloge sur l'écran LCD 
+		- Développement de la fonctionnalité de configuration de l'horloge
+		- Eventuelle(s) partie(s) bonus
+	- Une conclusion sur les enseignements que l'on peut tirer de ce projet. Tant d'un point de vue technique que méthodologique.
+
+Compléments sur le rapport : 
+- Dès que l'on utilise **directement** des registres du microcontrôleur, expliquer : 
+	- Quels sont les registres utilisés ?
+	- Quelles sont les valeurs qui ont été mises dans ces registres ?
+	- Quelles actions ont ces valeurs techniquement ? 
+	- Quelles sont les fonctionnalités recherchées qui justifient ces valeurs ?
+- Dès que des choix on été fait, comme des choix de configuration de module, ou des choix d'implémentation, expliquer ces choix, même quand plusieurs configurations correspondaient aux exigences. 
+- La description de `lcd_write_instr_4bits`, `lcd_write_instr_8bits` et `lcd_init` pourra être accompagnée d'organigrammes expliquant le déroulement de ces fonctions.
+- La description de la partie de configuration de l'horloge pourra être accompagnée d'un diagramme de la machine d'état.
+- Bien faire apparaître, et justifier, ce qui est effectué par interruption et ce qui ne l'est pas.
+- Même si vous n'avez pas réalisé une partie, vous pouvez l'indiquer et expliquer comment vous auriez fait.
+- Bon courage ;)
 
 ***Nota bene.*** :
 1. Le code source doit compiler !
