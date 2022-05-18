@@ -12,7 +12,7 @@
 
 /************************************************************************
                                 ETAPE 1
- Simplification des accès 
+ Simplification des acces 
 ************************************************************************/
 
 // voir dans "Header Files" => lib_LCD.h
@@ -20,20 +20,20 @@
 
 /************************************************************************
                                 ETAPE 2
- Développement de fonctions d'envoi de n'importe quelle instruction
+ Developpement de fonctions d'envoi de n'importe quelle instruction
 ************************************************************************/
 
 // Envoi d'une instruction au format 4 bits (initialisation) vers le module LCD
-void lcd_write_instr_4bits(unsigned char operation, unsigned char c){
+void lcd_write_instr_4bits(unsigned char rs, unsigned char rw, unsigned char data_4bits) {
     
 }
 
 // Envoi d'une instruction au format 8 bits vers le module LCD
-void lcd_write_instr_8bits(unsigned char operation, unsigned char c) {
+void lcd_write_instr_8bits(unsigned char rs, unsigned char rw, unsigned char data_8bits) {
     
 }
 
-// Test le bit BF jusqu'à ce que l'afficheur soit prêt
+// Attend que la commande precedente ait ete traitee
 void lcd_busy() {
     
 }
@@ -41,22 +41,22 @@ void lcd_busy() {
 
 /************************************************************************
                                 ETAPE 3
- Développement des fonctions correspondant aux différentes instructions
+ Developpement des fonctions correspondant aux differentes instructions
 ************************************************************************/
 
 // voir DS_Afficheurs_Sunplus.pdf p5, p6 et p7
 
-// Effacement de l'écran
+// Effacement de l'ecran
 void lcd_clear() {
     
 }
 
-// Retour du curseur à l'origine
+// Retour du curseur a l'origine
 void lcd_home() {
     
 }
 
-// Direction du curseur et décalage pendant l'ecriture
+// Direction du curseur et decalage pendant l'ecriture
 void lcd_entry_mode_set(unsigned char inc_dec, unsigned char shift) {
     
 }
@@ -66,12 +66,12 @@ void lcd_display_control(unsigned char display, unsigned char cursor, unsigned c
     
 }
 
-// Déplacement du curseur
-void lcd_shift_cursor(signed char amount) {
+// Deplacement du curseur ou de l'affichage d'un cran
+void lcd_cursor_display_shift(unsigned char cursor_display, unsigned char left_right) {
     
 }
 
-// Taille des données (4 / 8 bits), nombre de lignes, taille des caractères
+// Taille des donnees (4 / 8 bits), nombre de lignes, taille des caractï¿½res
 void lcd_function_set(unsigned char data_length, unsigned char lines, unsigned char font) {
     
 }
@@ -79,12 +79,12 @@ void lcd_function_set(unsigned char data_length, unsigned char lines, unsigned c
 
 /************************************************************************
                                 ETAPE 4
- Développement de la fonction d'initialisation
+ Developpement de la fonction d'initialisation
 ************************************************************************/
 
 // voir DS_Afficheurs_Sunplus.pdf p10 et p11
 
-// Initialisation générale de l'afficheur
+// Initialisation generale de l'afficheur
 void lcd_init() {
     
 }
@@ -92,20 +92,27 @@ void lcd_init() {
 
 /************************************************************************
                                 ETAPE 5
- Développement des fonctions utilisateur restantes.
+ Developpement des fonctions utilisateur restantes.
 ************************************************************************/
 
-// Ecriture d'un caractère sur l'afficheur
+// Ecriture d'un caractere sur l'afficheur
 void lcd_putch(unsigned char c) {
     
 }
 
-// Ecriture d'une chaine de caractères sur l'afficheur
+// Ecriture d'une chaine de caracteres sur l'afficheur
 void lcd_puts(const unsigned char *s) {
     
 }
 
+// Deplacement du curseur de <<amount>> crans. 
+// <<amount>> negatif = vers la gauche
+// <<amount>> positif = vers la droite
+void lcd_shift_cursor(signed char amount) {
+    
+}
+
 // Positionnement du curseur en (x,y) - origine en (1,1)
-void lcd_pos(unsigned char ligne, unsigned char pos) {
+void lcd_pos(unsigned char pos, unsigned char ligne) {
     
 }
