@@ -328,6 +328,30 @@ Il ne manque alors plus qu'à réaliser les fonctions pour écrire un caractère
 <h3 id="aide_horloge"> 4. Affichage de l'horloge sur l'écran LCD </h3>
 
 Pour formatter l'horloge dans une chaîne de caractère, le plus simple est certainement d'utiliser la fonction `sprintf` de la bibliothèque `stdio`.
+Pour obtenir la documentation de `sprintf`, il suffit de taper dans un terminal :
+```bash
+man sprintf
+```
+On voit qu'elle fonctionne comme `printf` mais avec un argument en plus : une chaîne de charactère de destination.
+
+Exemple :
+```c
+char formatted_time[STRING_LENGTH]; // STRING_LENGTH: nombre de caractères après formatage + 1 (pour le '\0' de fin de chaîne)
+sprintf(formatted_time, "%d:%d:%d", t.hours, t.minutes, t.seconds);
+```
+Resultat : `12:1:8`
+
+Comme `printf`, on peut forcer une mise en forme sur un nombre précis de charactères :
+```c
+sprintf(formatted_time, "%2d:%2d:%2d", t.hours, t.minutes, t.seconds);
+```
+Resultat : `12: 1: 8`
+
+De même, on peut forcer l'affichage des 0 :
+```c
+sprintf(formatted_time, "%02d:%02d:%02d", t.hours, t.minutes, t.seconds);
+```
+Resultat : `12:01:08`
 
 <h3 id="aide_conf_horloge"> 5. Développement de la fonctionnalité de configuration de l'horloge </h3>
 
