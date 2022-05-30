@@ -76,7 +76,8 @@ Compléments sur le rapport :
 	- Quelles sont les valeurs qui ont été mises dans ces registres ?
 	- Quelles actions ont ces valeurs techniquement ? 
 	- Quelles sont les fonctionnalités recherchées qui justifient ces valeurs ?
-- Dès que des choix on été fait, comme des choix de configuration de module, ou des choix d'implémentation, expliquer ces choix, même quand plusieurs configurations correspondaient aux exigences. 
+- Pour l'explication des fonctions, il ne s'agit pas de juste expliquer ce qu'elles font fonctionnemment (ça c'est le cahier des charges, que l'on a déjà). Il s'agit d'expliquer **comment elles ont été implémentées** (opérations utilisées, logique, optimisations, ...) et pourquoi elles sont implémentées comme ça et pas autrement.
+- De manière générale, dès que des choix on été fait, comme des choix de configuration de module, ou des choix d'implémentation, expliquer ces choix, **même quand plusieurs configurations correspondaient aux exigences**. 
 - La description de `lcd_write_instr_4bits`, `lcd_write_instr_8bits` et `lcd_init` pourra être accompagnée d'organigrammes expliquant le déroulement de ces fonctions.
 - La description de la partie de configuration de l'horloge pourra être accompagnée d'un diagramme de la machine d'état.
 - Bien faire apparaître, et justifier, ce qui est effectué par interruption et ce qui ne l'est pas.
