@@ -17,20 +17,22 @@
 // LIBRARIES
 #include <xc.h>	
 #include <stdio.h>	
-#include "horloge.h"
+#include "timer.h"
 #include "lib_LCD.h"
 
 
-void interrupt IT() {	  
+// Fonction d'interruption
+void interrupt IT() {
     
 }
 
-
+// Fonction d'initialisation
 void init() {
-    
+    timer_init();
+    lcd_init();
 }
 
-// ne pas oublier d'ajouter ce qui a été fait dans test_led.c
+
 void main() { 
     init();
     

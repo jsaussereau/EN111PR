@@ -4,15 +4,12 @@
           sur carte PICDEM2+
 *****************************************
 
-            Library I²C
+              Lib Timer
   
 ****************************************/
 
-#ifndef __LIB_I2C
-#define	__LIB_I2C
+#include "timer.h"
 
-#include <xc.h>  
-
-
-
-#endif	/* __LIB_I2C */
+void timer_init() {
+    
+}
