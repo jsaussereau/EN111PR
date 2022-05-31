@@ -23,13 +23,11 @@
  Developpement de fonctions d'envoi de n'importe quelle instruction
 ************************************************************************/
 
-/// 
 /// \brief Envoi d'une instruction de 4 bits vers le module LCD 
 ///        (utile pour l'initialisation) 
 /// \param rs selectionne le registre de destination (1 bit)
 /// \param rw selectionne s'il s'agit d'une lecture ou d'une ecriture (1 bit)
 /// \param data_4bits est la donnee a ecrire (4 bits)
-/// 
 void lcd_write_instr_4bits(unsigned char rs, unsigned char rw, unsigned char data_4bits) {
     
 }
@@ -67,21 +65,31 @@ void lcd_home() {
 }
 
 /// \brief Direction du curseur et decalage pendant l'ecriture
+/// \param inc_dec (1 bit)
+/// \param shift (1 bit)
 void lcd_entry_mode_set(unsigned char inc_dec, unsigned char shift) {
     
 }
 
 /// \brief Ecran ON/OFF, Curseur ON/OFF, Clignotement ON/OFF
+/// \param display (1 bit)
+/// \param cursor (1 bit)
+/// \param blink (1 bit)
 void lcd_display_control(unsigned char display, unsigned char cursor, unsigned char blink) {
     
 }
 
 /// \brief Deplacement du curseur ou de l'affichage d'un cran a gauche ou a droite
+/// \param cursor_display (1 bit)
+/// \param left_right (1 bit)
 void lcd_cursor_display_shift(unsigned char cursor_display, unsigned char left_right) {
     
 }
 
 /// \brief Taille des donnees (4 / 8 bits), nombre de lignes, taille des caracteres
+/// \param data_length (1 bit)
+/// \param lines (1 bit)
+/// \param font (1 bit)
 void lcd_function_set(unsigned char data_length, unsigned char lines, unsigned char font) {
     
 }
