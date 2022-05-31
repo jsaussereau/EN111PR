@@ -10,6 +10,7 @@
 
 #include "timer.h"
 
+/// \brief Configuration du Timer 1
 void timer_init() {
     
 }

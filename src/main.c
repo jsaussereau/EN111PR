@@ -21,18 +21,18 @@
 #include "lib_LCD.h"
 
 
-// Fonction d'interruption
+/// \brief Fonction d'interruption
 void interrupt IT() {
     
 }
 
-// Fonction d'initialisation
+/// \brief Fonction d'initialisation
 void init() {
     timer_init();
     lcd_init();
 }
 
-
+/// \brief Fonction principale
 void main() { 
     init();
     

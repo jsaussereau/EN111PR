@@ -4,7 +4,7 @@
           sur carte PICDEM2+
 *****************************************
 
-            Library LCD
+               Lib LCD
   
 ****************************************/
 
@@ -23,19 +23,28 @@
  Developpement de fonctions d'envoi de n'importe quelle instruction
 ************************************************************************/
 
-// Envoi d'une instruction au format 4 bits (initialisation) vers le module LCD
+/// 
+/// \brief Envoi d'une instruction de 4 bits vers le module LCD 
+///        (utile pour l'initialisation) 
+/// \param rs selectionne le registre de destination (1 bit)
+/// \param rw selectionne s'il s'agit d'une lecture ou d'une ecriture (1 bit)
+/// \param data_4bits est la donnee a ecrire (4 bits)
+/// 
 void lcd_write_instr_4bits(unsigned char rs, unsigned char rw, unsigned char data_4bits) {
     
 }
 
-// Envoi d'une instruction au format 8 bits vers le module LCD
+/// \brief Envoi d'une instruction de 8 bits vers le module LCD
+/// \param rs selectionne le registre de destination (1 bit)
+/// \param rw selectionne s'il s'agit d'une lecture ou d'une ecriture (1 bit)
+/// \param data_8bits est la donnee a ecrire (8 bits)
 void lcd_write_instr_8bits(unsigned char rs, unsigned char rw, unsigned char data_8bits) {
     
 }
 
-// Attend que la commande precedente ait ete traitee
+/// \brief Attente le temps que la commande precedente ait ete traitee
 void lcd_busy() {
-    
+
 }
 
 
@@ -45,33 +54,34 @@ void lcd_busy() {
 ************************************************************************/
 
 // voir DS_Afficheurs_Sunplus.pdf p5, p6 et p7
+// chaque fonction correspond a une instruction de l'ecran LCD
 
-// Effacement de l'ecran
+/// \brief Effacement de l'ecran
 void lcd_clear() {
     
 }
 
-// Retour du curseur a l'origine
+/// \brief Retour du curseur a l'origine
 void lcd_home() {
     
 }
 
-// Direction du curseur et decalage pendant l'ecriture
+/// \brief Direction du curseur et decalage pendant l'ecriture
 void lcd_entry_mode_set(unsigned char inc_dec, unsigned char shift) {
     
 }
 
-// Ecran ON/OFF, Curseur ON/OFF, Clignotement ON/OFF
+/// \brief Ecran ON/OFF, Curseur ON/OFF, Clignotement ON/OFF
 void lcd_display_control(unsigned char display, unsigned char cursor, unsigned char blink) {
     
 }
 
-// Deplacement du curseur ou de l'affichage d'un cran
+/// \brief Deplacement du curseur ou de l'affichage d'un cran a gauche ou a droite
 void lcd_cursor_display_shift(unsigned char cursor_display, unsigned char left_right) {
     
 }
 
-// Taille des donnees (4 / 8 bits), nombre de lignes, taille des caract�res
+/// \brief Taille des donnees (4 / 8 bits), nombre de lignes, taille des caracteres
 void lcd_function_set(unsigned char data_length, unsigned char lines, unsigned char font) {
     
 }
@@ -84,7 +94,7 @@ void lcd_function_set(unsigned char data_length, unsigned char lines, unsigned c
 
 // voir DS_Afficheurs_Sunplus.pdf p10 et p11
 
-// Initialisation generale de l'afficheur
+/// \brief Initialisation generale de l'afficheur
 void lcd_init() {
     
 }
@@ -95,24 +105,29 @@ void lcd_init() {
  Developpement des fonctions utilisateur restantes.
 ************************************************************************/
 
-// Ecriture d'un caractere sur l'afficheur
+/// \brief Ecriture d'un caractere sur l'afficheur
+/// \param c est le caratere a envoyer
 void lcd_putch(unsigned char c) {
     
 }
 
-// Ecriture d'une chaine de caracteres sur l'afficheur
+/// \brief Ecriture d'une chaine de caracteres sur l'afficheur
+/// \param s est la chaine de carateres a envoyer
 void lcd_puts(const unsigned char *s) {
     
 }
 
-// Deplacement du curseur de <<amount>> crans. 
-// <<amount>> negatif = vers la gauche
-// <<amount>> positif = vers la droite
+/// \brief Deplacement du curseur de "amount" crans. 
+/// \param amount est l'offset a appliquer au curseur
+///        amount negatif = vers la gauche
+///        amount positif = vers la droite
 void lcd_shift_cursor(signed char amount) {
     
 }
 
-// Positionnement du curseur en (x,y) - origine en (1,1)
+/// \brief Positionnement du curseur en (x,y). Origine en (1,1)
+/// \param pos est la position horizontale
+/// \param ligne est la position verticale
 void lcd_pos(unsigned char pos, unsigned char ligne) {
     
 }
