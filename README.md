@@ -23,30 +23,30 @@ Il y a 3 dossiers principaux :
 
 ## Cahier des charges
 ### Objectifs principaux :
-- Faire clignoter une des LED à la fréquence 0.5 Hz (1 changement d'état toutes les secondes) à partir d'**interruptions** sur le Timer1. Cette fonctionnalité doit être maintenue même après le développement des étapes suivantes.   
-([Aide](#aide_led))
-- Développer une bibliothèque pour l'afficheur LCD (`lib_LCD.h` et `lib_LCD.c`) proposant à l'utilisateur au minimum les fonctionnalités suivantes :
+- Faire clignoter une des LED à la fréquence 0.5 Hz (1 changement d'état toutes les secondes) à partir d'**interruptions** sur le Timer1. Cette fonctionnalité doit être maintenue même après le développement des étapes suivantes. ([Aide](#aide_led))
+
+- Développer une bibliothèque pour l'afficheur LCD (`lib_LCD.h` et `lib_LCD.c`) proposant à l'utilisateur au minimum les fonctionnalités suivantes ([Aide](#aide_lib_lcd)) :
 	- `lcd_init` : Initialisation générale de l'afficheur en mode 4 bits
 	- `lcd_putch` : Ecriture d'un caractère sur l'afficheur
 	- `lcd_puts` : Ecriture d'une chaîne de caractères sur l'afficheur
 	- `lcd_pos` : Positionnement du curseur en (x,y) - origine en (1,1)
 	- `lcd_home` : Cursor home : positionnement du curseur (1,1)
 	- `lcd_clear` : Effacement de l'écran et cursor home  
-	([Aide](#aide_lib_lcd))
-- Affichage sur l'écran LCD d'une horloge au format `HH:MM:SS` qui s'incrémente à chaque seconde (via le Timer1).  
-([Aide](#aide_horloge))
-- Pouvoir configurer l'horloge à l'aide des boutons poussoir S2 et S3 :
+	
+- Affichage sur l'écran LCD d'une horloge au format `HH:MM:SS` qui s'incrémente à chaque seconde (via le Timer1). ([Aide](#aide_horloge))
+- Pouvoir configurer l'horloge à l'aide des boutons poussoir S2 et S3 ([Aide](#aide_conf_horloge)) :
 	- Un appui prolongé d'au moins 2 s sur S2 fera clignoter les heures, celles-ci s'incrémenteront à chaque appui sur S3, ou automatiquement (f ≈ 5 Hz) en cas d'appui maintenu au-delà de 2 s.
-	- Un nouvel appui sur S2 permettra un réglage des secondes selon la même procédure.
-	- Éventuellement, un nouvel appui sur S2 permettra un réglage des minutes selon la même procédure.
+	- Un nouvel appui sur S2 permettra un réglage des minutes selon la même procédure.
+	- Éventuellement, un nouvel appui sur S2 permettra un réglage des secondes selon la même procédure.
 	- Un dernier appui sur S2 fera quitter le mode "réglage".  
-	([Aide](#aide_conf_horloge))
 
 ### Objectifs Secondaires :
 ##### (Au choix et si le temps le permet)
+- Utilisation du potentiomètre pour régler les heures/minutes/secondes.
 - Ajout de charactères personnalisés sur l'afficheur.
 - Récupération via le protocole I²C de la température du capteur TC74.
 - Ajout d'une alarme quand l'horloge atteint une heure configurée, avec une sonnerie ou une mélodie sur le buzzer P1.
+- Utilisation de l'écran comme un afficheur à décalage (comme dans les bus/trams).
 - Toute autre idée que vous aimeriez développer avec les éléments à disposition sur la carte.
 
 
@@ -62,7 +62,7 @@ Il y a 3 dossiers principaux :
 		- Développement de la bibliothèque pour l'afficheur LCD 
 			- Simplification des accès
 			- Développement d'une fonction d'envoi de n'importe quelle commande
-			- Développement des fonctions correspondant aux différentes commandes
+			- Développement des fonctions correspondants aux différentes commandes
 			- Développement de la fonction d'initialisation
 			- Développement des fonctions utilisateur restantes
 		- Affichage de l'horloge sur l'écran LCD 
@@ -93,40 +93,84 @@ En matière de propriété intellectuelle, le plagiat constitue un délit.
 
 
 ## Aide
-<h3 id="aide_get_started"> 1. Get started </h3>
+<h3 id="aide_get_started"> 1. Getting started </h3>
 
 Un projet déjà configuré est disponible dans `/work`.
 
-Un cetain nombre de fichiers sont déjà créés dans le dossier `/src` :
-- `test_led.c` : Fichier principal pour développer [la première partie liée au timer](#aide_led)
-- `test_LCD.c` : Fichier principal à utiliser pour la suite du projet après la première partie validée. C'est ici que seront appelées les **fonctions utilisateur** de [la bibliothèque LCD](#aide_lib_lcd) que vous allez développer. Ne pas oublier de commencer par y ajouter ce que vous avez fait dans test_led.c, et bien sûr de désactiver test_led.c et activer test_LCD.c.
-- `lib_LCD.c` et `lib_LCD.h` : Fichiers où développer [la bibliothèque LCD](#aide_lib_lcd) à proprement parler.
-- `horloge.c` et `horloge.h` : Fichiers où développer [la mise en forme](#aide_horloge) et [la configuration](#aide_conf_horloge) de l'horloge.
-- `lib_i2c.c` et `lib_i2c.h` : Fichiers où développer la partie optionnelle sur la récupération de la température du capteur TC74.
+Plusieurs fichiers sont déjà créés dans le dossier `/src` (voir "Header Files" et "Source Files" dans MPLABX) :
+- `main.c` : Fichier principal. C'est ici que se trouve la fonction main et la fonction d'interruption.
+- `timer.c` et `timer.h` : Fichiers où développer [la configuration du timer](#aide_led), [la mise en forme](#aide_horloge) et [la configuration](#aide_conf_horloge) de l'horloge.
+- `lib_LCD.c` et `lib_LCD.h` : Fichiers où développer [la bibliothèque LCD](#aide_lib_lcd).
 	
 À chaque étape, pensez à faire valider votre travail avant de passer aux étapes suivantes.
 
 <h3 id="aide_led"> 2. Clignotement de la LED à la fréquence 0.5 Hz </h3>
 
-#### 2.1 Configuration du timer
+#### 2.1 Choix de la stratégie
 
-Pour générer une horloge de fréquence 0.5 Hz précisément, on utilise le Timer 1. La section Timer1 de la datasheet du microcontrôleur *DS_PIC16F877A* détaille son fonctionnement et les registres à utiliser pour le configurer.
+Nous avons ici une exigence de précision, alors comme en TP, c'est la stratégie par interruption qui s'impose face à l'attente active.
 
-Il est possible de configurer le timer 1 sur une horloge externe. La carte PICDEM2+ intègre un quartz de 32,768 kHz relié aux broches OSO (RC0) et OSI (RC1) du PIC. Ceci permet une incrémentation du TIMER1 et un débordement de celui-ci toutes les 2 secondes (2^16 / 32768) très précisément.
+Pour génerer les interruptions qui ferront clignoter la LED, nous avons le choix entre les 3 timers du microcontrôleur. La datasheet nous apprend qu'il est possible de configurer le Timer 1 sur une horloge externe. La carte PICDEM2+ intègre un quartz de 32,768 kHz relié aux broches OSO (RC0) et OSI (RC1) du PIC. Ceci permet une incrémentation du Timer 1 à cette fréquence, et ainsi un débordement de celui-ci toutes les 2 secondes (2^16 / 32768) très précisément. Le Timer 1 est donc un bon candidat pour cette application.
 
+#### 2.2 Développement d'une bibliothèque pour le Timer 1
+
+La section "Timer1" de la datasheet du microcontrôleur *DS_PIC16F877A* détaille le fonctionnement de ce timer, avec notamment un schéma de son fonctionnement et un tableau regroupant les registres à utiliser pour le configurer.
+
+On cherche ensuite à définir à l'aide `#define` dans `timer.h` (Header Files) les différentes valeurs des champs associés au Timer 1. Cela permettra d'avoir juste à choisir la bonne constante lors de la configuration du timer.
+
+En plus de faciliter l'étape de configuration, l'objectif est que par la suite chaque ligne de code soit compréhensible sans avoir à regarder la datasheet.
+
+#### Exemple de ce qu'il **ne faut pas** faire :
+`timer.c`
+```c
+void timer_init() {
+	T1CON = 0x4c;
+}
+```
+La notation est compacte mais on ne comprend rien à ce qu'il se passe... 
+Sans la datasheet sous les yeux et un effort de compréhension (avec risque d'erreur), impossible de savoir à quelle configuration correspond cette valeur. 
+
+Dans le milieu professionnel, les codes sont écrits par plusieurs personnes et doivent pouvoir être repris par n'importe qui dans le futur. Il donc est impensable de produire un tel code en entreprise.
+
+#### Exemple de notation bien plus lisible :
+`timer.h`
+```c
+//T1CONbits.T1CKPS :
+#define T1_PRESCALER_DIV8 0b11
+#define T1_PRESCALER_DIV4 0b10
+#define T1_PRESCALER_DIV2 0b01
+#define T1_PRESCALER_DIV1 0b00
+
+//...
+```
+`timer.c`
+```c
+void timer_init() {
+	T1CONbits.T1CKPS = T1_PRESCALER_DIV8; // Division par 8 car ...
+	T1CONbits.T1OSCEN = ...;
+}
+```
+Cette notation demande un effort supplémentaire lors de l'écriture du programme mais rendra le débuggage et la modification tellement plus facile. Ici, même sans la datasheet, on comprend ce qu'il se passe.
+
+De plus, les commentaires sont un bon moyen de se rappeler pourquoi on a fait tel ou tel choix.
+
+#### 2.3 Configuration du timer
+
+Il ne reste plus qu'à utiliser ces définitions pour l'initialisation du timer dans la fonction `timer_init` (`timer.c`).
+
+Le tableau à la page 60 de la datasheet *DS_PIC16F877A* met en évidence tous les champs liés au Timer1. Pour être sûr de l'avoir bien configuré, il faut être sûr de comprendre quel est le rôle de chacun de ces champs et être sûr d'avoir assigné la bonne valeur aux champs qui en ont besoin.
 Pour pouvoir faire une action à chaque débordement, il faut activer les interruptions sur les débordements du Timer1.
 
-***Note*** : Le tableau à la page 60 de la datasheet *DS_PIC16F877A* met en évidence tous les champs liés au Timer1. Pour être sûr de l'avoir bien configuré, il faut être sûr de comprendre quel est le rôle de chacun de ces champs et être sûr d'avoir assigné la bonne valeur aux champs qui en ont besoin.
-
-#### 2.2 Configuration du module CCP
+#### 2.4 Configuration du module CCP
 
 Pour avoir un débordement toutes les secondes (et pas toutes les 2 secondes), on peut utiliser un module de comparaison CCP.  
 Le but est ici d'utiliser ce module pour générer une interruption à chaque fois que la valeur du compteur du Timer1 est à mi-parcours (entre deux interruptions de débordement). Il faut donc également activer les interruptions sur module CCP.  
 Les modules CCP peuvent être utilisés dans différentes configurations, il faut choisir la plus adaptée au besoin.  
-Il faut aussi penser à bien mettre une valeur à comparer
+Il faut aussi penser à bien mettre une valeur à comparer.
+
+Comme pour la configuration du timer, la configuration du module CCP se fera a l'aide de constantes définies au préalable.
 
 ***Note*** : Le tableau à la page 68 de la datasheet *DS_PIC16F877A* met en évidence tous les champs liés au module CCP. Pour être sûr de l'avoir bien configuré, il faut être sûr de comprendre quel est le rôle de chacun de ces champs et être sûr d'avoir assigné la bonne valeur aux champs qui en ont besoin.
-
 
 
 <h3 id="aide_lib_lcd"> 3. Développement de la bibliothèque pour l'afficheur LCD </h3>
@@ -226,9 +270,10 @@ Grâce aux deux définitions spécifiées du port, on a alors plusieurs façons 
 Exemple d'utilisation :
 `lib_LCD.c`
 ```c
-void lcd_write_instr_8bits(unsigned char operation, unsigned char data) {
+void lcd_write_instr_8bits(unsigned char rs, unsigned char rw, unsigned char data_8bits) {
     // [...]
-    LCDbits.OPERATION = operation; 
+    LCDbits.RS = rs; 
+    // [...]
     LCDbits.DB = data_MSB;
     LCDbits.E = E_ENABLED;
     // [...]
@@ -256,7 +301,7 @@ C'est le cas le plus simple : on écrit 4 bits de données sur un bus un bus de 
 Pour envoyer ces données, il suffit respecter les chronogrammes sur les pages 3 et 4 de la datasheet *DS_LCD_Module_162F*. 
 
 ```c
-void lcd_write_instr_4bits(unsigned char operation, unsigned char data) {
+void lcd_write_instr_4bits(unsigned char rs, unsigned char rw, unsigned char data_4bits) {
     // on assigne les signaux de contrôles 
     // on écrit les 4 bits de la donnée
 }
@@ -279,7 +324,7 @@ Il faut donc faire des [opérations binaires](https://dept-info.labri.fr/ENSEIGN
 Le protocole exige d'envoyer les bits de poids fort en premier.
 
 ```c
-void lcd_write_instr_8bits(unsigned char operation, unsigned char data) {
+void lcd_write_instr_8bits(unsigned char rs, unsigned char rw, unsigned char data_8bits) {
     // on assigne les signaux de contrôles 
     // on écrit les 4 bits de poids fort de la donnée
     // on écrit les 4 bits de poids faible de la donnée
@@ -303,30 +348,30 @@ Notamment les suivantes :
 - `Cursor or Display Shift `
 - `Function Set `
 
-Certaines prennent des arguments, d'autres non. Voici une proposition de prototypes pour ces fonctions :
-`lib_LCD.h`
-```c
-void lcd_clear();
-void lcd_home();
-void lcd_entry_mode_set(unsigned char inc_dec, unsigned char shift);
-void lcd_display_control(unsigned char display, unsigned char cursor, unsigned char blink);
-void lcd_shift_cursor(signed char amount);
-void lcd_function_set(unsigned char data_length, unsigned char lines, unsigned char font);
-```
-Pour générer la donnée de la commande avec les bons arguments, il sera probablement nécessaire d'effectuer des [opérations binaires](https://dept-info.labri.fr/ENSEIGNEMENT/programmation1/cours/CM_9___Manipulation_binaire.pdf).
-
+Pour générer la donnée de la commande avec les bons arguments, il sera pour certaines fonctions nécessaire d'effectuer des [opérations binaires](https://dept-info.labri.fr/ENSEIGNEMENT/programmation1/cours/CM_9___Manipulation_binaire.pdf).
 
 #### <ins>Étape 4</ins>  : Développement de la fonction d'initialisation
 La page 11 de la datasheet du module LCD *DS_Afficheurs_Sunplus* détaille la procédure d'initialisation du module.
-Plutôt que d'envoyer les commandes avec les données brutes dans cette procédure, il est préférable de comprendre ce que fait chacune d'entre elles. Ainsi, on remarque que toute la procédure d'initialisation peut être réalisée en effectuant des appels aux fonctions définies plus haut.
+Plutôt que d'envoyer les commandes avec les données brutes dans cette procédure, il est préférable de comprendre ce que fait chacune d'entre elles. Ainsi, on remarque qu'une grande partie de la procédure d'initialisation peut être réalisée en effectuant des appels aux fonctions définies plus haut.
 
-***Note*** : Ne pas oublier d'activer l'alimentation du module (*cf.* datasheet de la carte PICDEM2+).
+***Note*** : 
+- Penser à l'alimentation du module (*cf.* datasheet de la carte PICDEM2+).
+- Penser aux ports du microcontrôleur qui ont été utilisés... Ont-ils bien été définis comme entrée/sortie ?
 
 #### <ins>Étape 5</ins>  : Développement des fonctions utilisateur restantes.
 
-Il ne manque alors plus qu'à réaliser les fonctions pour écrire un caractère `lcd_putch`, puis une pour écrire une chaîne de caractères `lcd_puts` et une fonction de positionnement sur l'écran `lcd_pos`.
+Il ne manque alors plus qu'à réaliser les fonctions :
+- `lcd_putch` pour écrire un caractère 
+- `lcd_puts` pour écrire une chaîne de caractères 
+- `lcd_shift_cursor` pour pour déplacer le curseur 
+- `lcd_pos` pour le positionnement du curseur en un point de l'écran
 
 <h3 id="aide_horloge"> 4. Affichage de l'horloge sur l'écran LCD </h3>
+
+Maintenant que l'on peut afficher ce que l'on veut sur écran, on cherche à afficher l'horloge.
+On utilise donc la fonction d'interruption (déclenchée toutes les secondes grâce à la configuration du timer) pour générer les heures, minutes et secondes qui seront affichés sur l'écran.
+
+Comme toujours en programmation microcontroleur, bien réfléchir à ce qui doit être fait dans la fonction d'interruption et ce qui doit être fait ailleurs...
 
 Pour formatter l'horloge dans une chaîne de caractère, le plus simple est certainement d'utiliser la fonction `sprintf` de la bibliothèque `stdio`.
 Pour obtenir la documentation de `sprintf`, il suffit de taper dans un terminal :
@@ -357,42 +402,10 @@ Resultat : `12:01:08`
 <h3 id="aide_conf_horloge"> 5. Développement de la fonctionnalité de configuration de l'horloge </h3>
 
 Pour cette partie, il est nécessaire de développer une machine d'état, avec une filtre anti-rebond (à base de temporisation active) sur les boutons. 
+L'objectif est de pouvoir configurer l'horloge à l'aide des boutons poussoir S2 et S3 :
+- Un appui prolongé d'au moins 2 s sur S2 fera clignoter les heures, celles-ci s'incrémenteront à chaque appui sur S3, ou automatiquement (f ≈ 5 Hz) en cas d'appui maintenu au-delà de 2 s.
+- Un nouvel appui sur S2 permettra un réglage des minutes selon la même procédure.
+- Éventuellement, un nouvel appui sur S2 permettra un réglage des secondes selon la même procédure.
+- Un dernier appui sur S2 fera quitter le mode "réglage".
 
-## Attentes
-Un rapport est à rendre à l'issue des séances. 
-Vous devez être en capacité d'expliquer n'importe quelle valeur que vous avez mise dans les registres et ce qui a motivé votre choix. Pensez donc à prendre des notes, et surtout à avoir un code facilement lisible.
-
-Vous rendrez également vos codes sources. La qualité du code est un critère important dans la notation : chaque ligne doit être compréhensible sans avoir à regarder la datasheet.
-
-#### Exemple de ce qu'il **ne faut pas** faire :
-`horloge.c`
-```c
-void timer_init() {
-	T1CON = 0x4c;
-}
-```
-La notation est compacte mais on ne comprend rien à ce qu'il se passe... 
-Sans la datasheet sous les yeux et un effort de compréhension (avec risque d'erreur), impossible de savoir à quelle configuration correspond cette valeur. 
-
-Dans le milieu professionnel, les codes sont écrits par plusieurs personnes et doivent pouvoir être repris par n'importe qui dans le futur. Il donc est impensable d'utiliser cette notation...
-
-#### Exemple de notation bien plus lisible :
-`horloge.h`
-```c
-#define T1_PRESCALER_DIV8 0b11
-#define T1_INTERNAL_CLOCK 0b0
-#define T1_ENABLED 0b1
-```
-`horloge.c`
-```c
-void timer_init() {
-	T1CONbits.T1CKPS = T1_PRESCALER_DIV8; // Division par 8 : 2 Hz / 8 -> 0.250 Hz
-	T1CONbits.TMR1CS = T1_INTERNAL_CLOCK; // Horloge interne car...
-	T1CONbits.TMR1ON = T1_ENABLED;
-}
-```
-Cette notation demande un effort supplémentaire lors de l'écriture du programme mais rendra le débuggage et la modification tellement plus facile. Ici, même sans la datasheet, on comprend ce qu'il se passe.
-
-De plus, les commentaires sont un bon moyen de se rappeler pourquoi on a fait tel ou tel choix.
-
-
+Une amélioration de cette fonctionnalité de configuration est d'utiliser le potentiomètre de la carte au lieu du bouton S3 (bonus).
