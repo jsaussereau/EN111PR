@@ -12,6 +12,7 @@
 #define	__LIB_LCD
 
 #include <xc.h>  
+#include <stdint.h>  
 
 // On introduira ici tous les symboles et macros utiles qui faciliteront 
 // la maintenance et la lisibilite du fichier source correspondant
@@ -21,8 +22,8 @@
 // voir https://git.io/EN111PR => 3. Developpement de la bibliotheque pour l'afficheur LCD 
 
 // Etape 2 : Developpement de fonctions d'envoi de n'importe quelle instruction
-void lcd_write_instr_4bits(unsigned char rs, unsigned char rw, unsigned char data_4bits);
-void lcd_write_instr_8bits(unsigned char rs, unsigned char rw, unsigned char data_8bits);
+void lcd_write_instr_4bits(uint8_t rs, uint8_t rw, uint8_t data_4bits);
+void lcd_write_instr_8bits(uint8_t rs, uint8_t rw, uint8_t data_8bits);
 void lcd_busy();
 
 // Etape 3 : Developpement des fonctions correspondant aux differentes instructions
@@ -48,18 +49,18 @@ void lcd_busy();
 
 void lcd_clear();
 void lcd_home();
-void lcd_entry_mode_set(unsigned char inc_dec, unsigned char shift);
-void lcd_display_control(unsigned char display, unsigned char cursor, unsigned char blink);
-void lcd_cursor_display_shift(unsigned char cursor_display, unsigned char left_right);
-void lcd_function_set(unsigned char data_length, unsigned char lines, unsigned char font);
+void lcd_entry_mode_set(uint8_t inc_dec, uint8_t shift);
+void lcd_display_control(uint8_t display, uint8_t cursor, uint8_t blink);
+void lcd_cursor_display_shift(uint8_t cursor_display, uint8_t left_right);
+void lcd_function_set(uint8_t data_length, uint8_t lines, uint8_t font);
 
 // Etape 4 : Developpement de la fonction d'initialisation
 void lcd_init();
 
 // Etape 5 : Developpement des fonctions utilisateur restantes.
-void lcd_putch(unsigned char c);
-void lcd_puts(const unsigned char *s);
-void lcd_shift_cursor(signed char amount);
-void lcd_pos(unsigned char pos, unsigned char ligne);
+void lcd_putch(char c);
+void lcd_puts(const char *s);
+void lcd_shift_cursor(int8_t amount);
+void lcd_pos(uint8_t pos, uint8_t ligne);
 
 #endif	/* __LIB_LCD */

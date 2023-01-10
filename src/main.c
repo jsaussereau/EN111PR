@@ -17,6 +17,8 @@
 // LIBRARIES
 #include <xc.h>	
 #include <stdio.h>	
+#include <stdint.h>  
+
 #include "timer.h"
 #include "lib_LCD.h"
 

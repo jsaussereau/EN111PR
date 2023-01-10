@@ -12,6 +12,7 @@
 #define	__HORLOGE
 
 #include <xc.h>  
+#include <stdint.h>  
 
 /*
 On introduira ici des definitions pour toutes les valeurs des champs

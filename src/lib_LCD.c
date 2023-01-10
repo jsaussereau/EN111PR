@@ -28,7 +28,7 @@
 /// \param rs selectionne le registre de destination (1 bit)
 /// \param rw selectionne s'il s'agit d'une lecture ou d'une ecriture (1 bit)
 /// \param data_4bits est la donnee a ecrire (4 bits)
-void lcd_write_instr_4bits(unsigned char rs, unsigned char rw, unsigned char data_4bits) {
+void lcd_write_instr_4bits(uint8_t rs, uint8_t rw, uint8_t data_4bits) {
     
 }
 
@@ -36,7 +36,7 @@ void lcd_write_instr_4bits(unsigned char rs, unsigned char rw, unsigned char dat
 /// \param rs selectionne le registre de destination (1 bit)
 /// \param rw selectionne s'il s'agit d'une lecture ou d'une ecriture (1 bit)
 /// \param data_8bits est la donnee a ecrire (8 bits)
-void lcd_write_instr_8bits(unsigned char rs, unsigned char rw, unsigned char data_8bits) {
+void lcd_write_instr_8bits(uint8_t rs, uint8_t rw, uint8_t data_8bits) {
     
 }
 
@@ -67,7 +67,7 @@ void lcd_home() {
 /// \brief Direction du curseur et decalage pendant l'ecriture
 /// \param inc_dec (1 bit)
 /// \param shift (1 bit)
-void lcd_entry_mode_set(unsigned char inc_dec, unsigned char shift) {
+void lcd_entry_mode_set(uint8_t inc_dec, uint8_t shift) {
     
 }
 
@@ -75,14 +75,14 @@ void lcd_entry_mode_set(unsigned char inc_dec, unsigned char shift) {
 /// \param display (1 bit)
 /// \param cursor (1 bit)
 /// \param blink (1 bit)
-void lcd_display_control(unsigned char display, unsigned char cursor, unsigned char blink) {
+void lcd_display_control(uint8_t display, uint8_t cursor, uint8_t blink) {
     
 }
 
 /// \brief Deplacement du curseur ou de l'affichage d'un cran a gauche ou a droite
 /// \param cursor_display (1 bit)
 /// \param left_right (1 bit)
-void lcd_cursor_display_shift(unsigned char cursor_display, unsigned char left_right) {
+void lcd_cursor_display_shift(uint8_t cursor_display, uint8_t left_right) {
     
 }
 
@@ -90,7 +90,7 @@ void lcd_cursor_display_shift(unsigned char cursor_display, unsigned char left_r
 /// \param data_length (1 bit)
 /// \param lines (1 bit)
 /// \param font (1 bit)
-void lcd_function_set(unsigned char data_length, unsigned char lines, unsigned char font) {
+void lcd_function_set(uint8_t data_length, uint8_t lines, uint8_t font) {
     
 }
 
@@ -115,13 +115,13 @@ void lcd_init() {
 
 /// \brief Ecriture d'un caractere sur l'afficheur
 /// \param c est le caratere a envoyer
-void lcd_putch(unsigned char c) {
+void lcd_putch(char c) {
     
 }
 
 /// \brief Ecriture d'une chaine de caracteres sur l'afficheur
 /// \param s est la chaine de carateres a envoyer
-void lcd_puts(const unsigned char *s) {
+void lcd_puts(const char *s) {
     
 }
 
@@ -129,13 +129,13 @@ void lcd_puts(const unsigned char *s) {
 /// \param amount est l'offset a appliquer au curseur
 ///        amount negatif = vers la gauche
 ///        amount positif = vers la droite
-void lcd_shift_cursor(signed char amount) {
+void lcd_shift_cursor(int8_t amount) {
     
 }
 
 /// \brief Positionnement du curseur en (x,y). Origine en (1,1)
 /// \param pos est la position horizontale
 /// \param ligne est la position verticale
-void lcd_pos(unsigned char pos, unsigned char ligne) {
+void lcd_pos(uint8_t pos, uint8_t ligne) {
     
 }

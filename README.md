@@ -209,7 +209,7 @@ Les accès au bits se font ainsi simplement par leurs noms. Pour écrire sur plu
 
 `lib_LCD.c`
 ```c
-void lcd_write_instr_8bits(unsigned char rs, unsigned char rw, unsigned char data) {
+void lcd_write_instr_8bits(uint8_t rs, uint8_t rw, uint8_t data) {
     // [...]
     RS = rs;
     RW = rw;
@@ -270,7 +270,7 @@ Grâce aux deux définitions spécifiées du port, on a alors plusieurs façons 
 Exemple d'utilisation :
 `lib_LCD.c`
 ```c
-void lcd_write_instr_8bits(unsigned char rs, unsigned char rw, unsigned char data_8bits) {
+void lcd_write_instr_8bits(uint8_t rs, uint8_t rw, uint8_t data_8bits) {
     // [...]
     LCDbits.RS = rs; 
     // [...]
@@ -301,7 +301,7 @@ C'est le cas le plus simple : on écrit 4 bits de données sur un bus un bus de 
 Pour envoyer ces données, il suffit respecter les chronogrammes sur les pages 3 et 4 de la datasheet *DS_LCD_Module_162F*. 
 
 ```c
-void lcd_write_instr_4bits(unsigned char rs, unsigned char rw, unsigned char data_4bits) {
+void lcd_write_instr_4bits(uint8_t rs, uint8_t rw, uint8_t data_4bits) {
     // on assigne les signaux de contrôles 
     // on écrit les 4 bits de la donnée
 }
@@ -324,7 +324,7 @@ Il faut donc faire des [opérations binaires](https://dept-info.labri.fr/ENSEIGN
 Le protocole exige d'envoyer les bits de poids fort en premier.
 
 ```c
-void lcd_write_instr_8bits(unsigned char rs, unsigned char rw, unsigned char data_8bits) {
+void lcd_write_instr_8bits(uint8_t rs, uint8_t rw, uint8_t data_8bits) {
     // on assigne les signaux de contrôles 
     // on écrit les 4 bits de poids fort de la donnée
     // on écrit les 4 bits de poids faible de la donnée
