@@ -51,7 +51,13 @@ Il y a 3 dossiers principaux :
 
 
 ## Évaluation
-À rendre par mail à [jsaussereau@bordeaux-inp.fr](mailto:jsaussereau@bordeaux-inp.fr?subject=[EN111]%20NOM1%20NOM2) avec comme objet `[EN111] NOM1 NOM2`, **avant le** *date à définir* :
+Le rendu se fait par mail avec comme objet `[EN111] NOM1 NOM2`, avant le *date à définir*, à l'adresse suivante :
+- Groupe D : [mael.tourres@u-bordeaux.fr](mailto:mael.tourres@u-bordeaux.fr?subject=[EN111]%20NOM1%20NOM2)
+- Groupe E : [jean-charles.henrion@u-bordeaux.fr](mailto:jean-charles.henrion@u-bordeaux.fr?subject=[EN111]%20NOM1%20NOM2)
+- Groupe F : [valery.lebret@enseirb-matmeca.fr](mailto:Valery.Lebret@enseirb-matmeca.fr?subject=[EN111]%20NOM1%20NOM2)
+- Groupe G : [jsaussereau@bordeaux-inp.fr](mailto:jsaussereau@bordeaux-inp.fr?subject=[EN111]%20NOM1%20NOM2)
+
+Sont à rendre:
 - Le code source (tous les fichiers `.c` et `.h` dans le dossier `/src`) compressés dans une archive `.zip`
 - Un rapport par binôme, d'environ 10 pages (hors annexe), au format `.pdf`, contenant :
 	- Une introduction du contexte en résumant le cahier des charges et en présentant les ressources utiles de la carte.
