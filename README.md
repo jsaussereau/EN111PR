@@ -52,7 +52,7 @@ Il y a 3 dossiers principaux :
 
 ## Évaluation
 Le rendu se fait par mail avec comme objet `[EN111] NOM1 NOM2`, avant le *date à définir*, à l'adresse suivante :
-- Groupe D : [mael.tourres@u-bordeaux.fr](mailto:mael.tourres@u-bordeaux.fr?subject=[EN111]%20NOM1%20NOM2)
+- Groupe D : [mael.tourres@univ-ubs.fr](mailto:mael.tourres@univ-ubs.fr?subject=[EN111]%20NOM1%20NOM2)
 - Groupe E : [jean-charles.henrion@u-bordeaux.fr](mailto:jean-charles.henrion@u-bordeaux.fr?subject=[EN111]%20NOM1%20NOM2)
 - Groupe F : [valery.lebret@enseirb-matmeca.fr](mailto:Valery.Lebret@enseirb-matmeca.fr?subject=[EN111]%20NOM1%20NOM2)
 - Groupe G : [jsaussereau@bordeaux-inp.fr](mailto:jsaussereau@bordeaux-inp.fr?subject=[EN111]%20NOM1%20NOM2)
@@ -99,7 +99,7 @@ En matière de propriété intellectuelle, le plagiat constitue un délit.
 
 
 ## Aide
-<h3 id="aide_get_started"> 1. Getting started </h3>
+<h3 id="aide_get_started"> 1. Get started 🏁</h3>
 
 Un projet déjà configuré est disponible dans `/work`.
 
