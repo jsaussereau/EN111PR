@@ -4,9 +4,8 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
-      <itemPath>../../src/horloge.h</itemPath>
-      <itemPath>../../src/lib_i2c.h</itemPath>
       <itemPath>../../src/lib_LCD.h</itemPath>
+      <itemPath>../../src/timer.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -15,11 +14,9 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>../../src/horloge.c</itemPath>
-      <itemPath>../../src/lib_i2c.c</itemPath>
       <itemPath>../../src/lib_LCD.c</itemPath>
-      <itemPath>../../src/test_LCD.c</itemPath>
-      <itemPath>../../src/test_led.c</itemPath>
+      <itemPath>../../src/main.c</itemPath>
+      <itemPath>../../src/timer.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
