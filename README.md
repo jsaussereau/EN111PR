@@ -164,8 +164,8 @@ De plus, les commentaires sont un bon moyen de se rappeler pourquoi on a fait te
 
 Il ne reste plus qu'à utiliser ces définitions pour l'initialisation du timer dans la fonction `timer_init` (`timer.c`).
 
-Le tableau à la page 60 de la datasheet *DS_PIC16F877A* met en évidence tous les champs liés au Timer1. Pour être sûr de l'avoir bien configuré, il faut être sûr de comprendre quel est le rôle de chacun de ces champs et être sûr d'avoir assigné la bonne valeur aux champs qui en ont besoin.
-Pour pouvoir faire une action à chaque débordement, il faut activer les interruptions sur les débordements du Timer1.
+La section `TIMER1 MODULE` de la datasheet *DS_PIC16F877A* décrit le fonctionnement du Timer1. Le tableau à la page 60 met en évidence tous les champs liés au Timer1. Pour être sûr de l'avoir bien configuré, il faut être sûr de **comprendre** quel est le rôle de chacun de ces champs et être sûr d'avoir assigné la bonne valeur aux champs qui en ont besoin. Le schéma page 58 aide à comprendre le rôle de chaque champ.
+Une fois le timer configuré, on veut déclencher une interruption à chaque débordement. Le schéma page 153 permet de visualiser les conditions à remplir pour qu'une interruption se déclenche. 
 
 #### 2.4 Configuration du module CCP
 
