@@ -302,7 +302,7 @@ On va donc développer des fonctions pour ces deux cas :
 ##### commandes 4 bits.
 Dans la datasheet du module LCD *DS_Afficheurs_Sunplus* on voit que pour la partie d'initialisation, il y a des commandes avec une données de 4 bits et 2 bits de contrôle.
 
-C'est le cas le plus simple : on écrit 4 bits de données sur un bus un bus de 4 bits.
+C'est le cas le plus simple : on écrit 4 bits de données sur un bus de 4 bits.
 
 Pour envoyer ces données, il suffit respecter les chronogrammes sur les pages 3 et 4 de la datasheet *DS_LCD_Module_162F*. 
 
