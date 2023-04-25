@@ -304,7 +304,7 @@ Dans la datasheet du module LCD *DS_Afficheurs_Sunplus* on voit que pour la part
 
 C'est le cas le plus simple : on écrit 4 bits de données sur un bus de 4 bits.
 
-Pour envoyer ces données, il suffit respecter les chronogrammes sur les pages 3 et 4 de la datasheet *DS_LCD_Module_162F*. 
+Pour envoyer ces données, il faut veiller à respecter les chronogrammes à la page 24 de la datasheet *DS_Afficheurs_Sunplus*. 
 
 ```c
 void lcd_write_instr_4bits(uint8_t rs, uint8_t rw, uint8_t data_4bits) {
