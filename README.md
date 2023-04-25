@@ -308,7 +308,7 @@ Pour envoyer ces données, il faut veiller à respecter les chronogrammes à la 
 
 ```c
 void lcd_write_instr_4bits(uint8_t rs, uint8_t rw, uint8_t data_4bits) {
-    // on assigne les signaux de contrôles 
+    // on assigne les signaux de contrôle
     // on écrit les 4 bits de la donnée
 }
 ```
@@ -331,7 +331,7 @@ Le protocole exige d'envoyer les bits de poids fort en premier.
 
 ```c
 void lcd_write_instr_8bits(uint8_t rs, uint8_t rw, uint8_t data_8bits) {
-    // on assigne les signaux de contrôles 
+    // on assigne les signaux de contrôle
     // on écrit les 4 bits de poids fort de la donnée
     // on écrit les 4 bits de poids faible de la donnée
 }
