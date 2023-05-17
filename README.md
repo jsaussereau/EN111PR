@@ -51,7 +51,7 @@ Il y a 3 dossiers principaux :
 
 
 ## Évaluation
-Le rendu se fait par mail avec comme objet `[EN111] NOM1 NOM2`, avant le *date à définir*, à l'adresse suivante :
+Le rendu se fait par mail avec comme objet `[EN111] NOM1 NOM2`, avant le 26/05/2023 23:59, à l'adresse suivante :
 - Groupe D : [mael.tourres@univ-ubs.fr](mailto:mael.tourres@univ-ubs.fr?subject=[EN111]%20NOM1%20NOM2)
 - Groupe E : [jean-charles.henrion@u-bordeaux.fr](mailto:jean-charles.henrion@u-bordeaux.fr?subject=[EN111]%20NOM1%20NOM2)
 - Groupe F : [valery.lebret@enseirb-matmeca.fr](mailto:Valery.Lebret@enseirb-matmeca.fr?subject=[EN111]%20NOM1%20NOM2)
