@@ -21,6 +21,24 @@ Il y a 3 dossiers principaux :
 * **src** : Contient les fichiers sources à utiliser (déjà importés dans le projet).
 * **work** : Le dossier dans lequel se situe le projet MPLABX, déjà configuré.
 
+## Sommaire
+- [Cahier des charges](#cahier-des-charges)
+- [Évaluation](#évaluation)
+- [Aide](#aide)
+	- [1. Get started](#-1-get-started-)
+	- [2. Clignotement de la LED à la fréquence 0.5 Hz](#-2-clignotement-de-la-led-à-la-fréquence-05-hz-)
+		- [2.1 Choix de la stratégie](#21-choix-de-la-stratégie)
+		- [2.2 Développement d'une bibliothèque pour le Timer 1](#22-développement-dune-bibliothèque-pour-le-timer-1)
+		- [2.3 Configuration du timer](#23-configuration-du-timer)
+		- [2.4 Configuration du module CCP](#24-configuration-du-module-ccp)
+  	- [3. Développement de la bibliothèque pour l'afficheur LCD ](#-3-développement-de-la-bibliothèque-pour-lafficheur-lcd-)
+		- [Documentation](#documentation)
+		- [Étape 1 : Simplification des accès](#étape-1---simplification-des-accès)
+		- [Étape 2 : Développement d'une fonction d'envoi de n'importe quelle commande](#étape-2--développement-dune-fonction-denvoi-de-nimporte-quelle-commande)
+		- [Étape 3 : Développement des fonctions correspondant aux différentes commandes](#étape-3--développement-des-fonctions-correspondant-aux-différentes-commandes)
+		- [Étape 4 : Développement de la fonction d'initialisation](#étape-4---développement-de-la-fonction-dinitialisation)
+		- [Étape 5 : Développement des fonctions utilisateur restantes](#étape-5---développement-des-fonctions-utilisateur-restantes)
+
 ## Cahier des charges
 ### Objectifs principaux :
 - Faire clignoter une des LED à la fréquence 0.5 Hz (1 changement d'état toutes les secondes) à partir d'**interruptions** sur le Timer1. Cette fonctionnalité doit être maintenue même après le développement des étapes suivantes. ([Aide](#aide_led))
@@ -185,7 +203,7 @@ Pour développer la bibliothèque LCD, 2 documents seront utiles :
 - *DS_PICDEM_2_Plus_Users_Guide* : Datasheet de la carte de développement. Le schéma électrique page 19 permet de comprendre les interconnexions entre le microcontrôleur et le module LCD.
 - *DS_Afficheurs_Sunplus* : Datasheet du module LCD. On y trouve la description des entrées/sorties du module (page 4), ansi que les chronogrammes à respecter pour ces signaux (pages 23-24). Toutes les commandes proposées par le module y sont détaillées (pages 5-7). Enfin, la datasheet explicite la procédure d'initialisation du module (pages 10-11). 
 
-#### <ins>Étape 1</ins>  : Simplification des accès
+#### <ins>Étape 1</ins> : Simplification des accès
 
 Pour envoyer des instructions, il faut être capable d'accéder individuellement aux différents champs du port D qui contrôlent l'écran LCD. Il est notamment nécessaire d'écrire sur les 4 bits de données sans modifier les autres bits du port.
 
@@ -355,7 +373,7 @@ Notamment les suivantes :
 
 Pour générer la donnée de la commande avec les bons arguments, il sera pour certaines fonctions nécessaire d'effectuer des [opérations binaires](https://dept-info.labri.fr/ENSEIGNEMENT/programmation1/cours/CM_9___Manipulation_binaire.pdf).
 
-#### <ins>Étape 4</ins>  : Développement de la fonction d'initialisation
+#### <ins>Étape 4</ins> : Développement de la fonction d'initialisation
 La page 11 de la datasheet du module LCD *DS_Afficheurs_Sunplus* détaille la procédure d'initialisation du module.
 Plutôt que d'envoyer les commandes avec les données brutes dans cette procédure, il est préférable de comprendre ce que fait chacune d'entre elles. Ainsi, on remarque qu'une grande partie de la procédure d'initialisation peut être réalisée en effectuant des appels aux fonctions définies plus haut.
 
@@ -363,7 +381,7 @@ Plutôt que d'envoyer les commandes avec les données brutes dans cette procédu
 - Penser à l'alimentation du module (*cf.* datasheet de la carte PICDEM2+).
 - Penser aux ports du microcontrôleur qui ont été utilisés... Ont-ils bien été définis comme entrée/sortie ?
 
-#### <ins>Étape 5</ins>  : Développement des fonctions utilisateur restantes.
+#### <ins>Étape 5</ins> : Développement des fonctions utilisateur restantes
 
 Il ne manque alors plus qu'à réaliser les fonctions :
 - `lcd_putch` pour écrire un caractère 
