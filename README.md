@@ -2,8 +2,8 @@
 
 ## Télécharger l'archive
 
-Appuyer sur 
-<a class="bg-green-light mb-2">  **↓ Code** </a>
+Appuyer sur le bouton vert
+<a class="bg-green-light mb-2">  "**<> Code ▾** " </a>
 puis **Download ZIP**
 
 ou dans un terminal :
@@ -32,12 +32,13 @@ Il y a 3 dossiers principaux :
 		- [2.3 Configuration du timer](#23-configuration-du-timer)
 		- [2.4 Configuration du module CCP](#24-configuration-du-module-ccp)
   	- [3. Développement de la bibliothèque pour l'afficheur LCD ](#-3-développement-de-la-bibliothèque-pour-lafficheur-lcd-)
-		- [Documentation](#documentation)
-		- [Étape 1 : Simplification des accès](#étape-1---simplification-des-accès)
+		- [Étape 1 : Simplification des accès](#documentation)
 		- [Étape 2 : Développement d'une fonction d'envoi de n'importe quelle commande](#étape-2--développement-dune-fonction-denvoi-de-nimporte-quelle-commande)
 		- [Étape 3 : Développement des fonctions correspondant aux différentes commandes](#étape-3--développement-des-fonctions-correspondant-aux-différentes-commandes)
-		- [Étape 4 : Développement de la fonction d'initialisation](#étape-4---développement-de-la-fonction-dinitialisation)
-		- [Étape 5 : Développement des fonctions utilisateur restantes](#étape-5---développement-des-fonctions-utilisateur-restantes)
+  		- [Étape 4 : Développement de la fonction d'initialisation](#étape-4--développement-de-la-fonction-dinitialisation)
+		- [Étape 5 : Développement des fonctions utilisateur restantes](#étape-5--développement-des-fonctions-utilisateur-restantes)
+  	- [4. Affichage de l'horloge sur l'écran LCD ](#-4-affichage-de-lhorloge-sur-lécran-lcd-)
+  	- [5. Développement de la fonctionnalité de configuration de l'horloge](#-5-développement-de-la-fonctionnalité-de-configuration-de-lhorloge-)
 
 ## Cahier des charges
 ### Objectifs principaux :
@@ -75,7 +76,7 @@ Le rendu se fait par mail avec comme objet `[EN111] NOM1 NOM2`, avant le (*date 
 - Groupe F : [valery.lebret@enseirb-matmeca.fr](mailto:Valery.Lebret@enseirb-matmeca.fr?subject=[EN111]%20NOM1%20NOM2)
 
 Sont à rendre:
-- Le code source (tous les fichiers `.c` et `.h` dans le dossier `/src`) compressés dans une archive `.zip`
+- Le code source (tous les fichiers `.c` et `.h` dans le dossier `src`) compressés dans une archive `.zip`
 - Un rapport par binôme, d'environ 10 pages (hors annexe), au format `.pdf`, contenant :
 	- Une introduction du contexte en résumant le cahier des charges et en présentant les ressources utiles de la carte.
 	- Une explication de la conception de chacune des parties du projet :
@@ -118,9 +119,9 @@ En matière de propriété intellectuelle, le plagiat constitue un délit.
 ## Aide
 <h3 id="aide_get_started"> 1. Get started 🏁</h3>
 
-Un projet déjà configuré est disponible dans `/work`.
+Un projet déjà configuré est disponible dans `work`.
 
-Plusieurs fichiers sont déjà créés dans le dossier `/src` (voir "Header Files" et "Source Files" dans MPLABX) :
+Plusieurs fichiers sont déjà créés dans le dossier `src` (voir "Header Files" et "Source Files" dans MPLABX) :
 - `main.c` : Fichier principal. C'est ici que se trouve la fonction main et la fonction d'interruption.
 - `timer.c` et `timer.h` : Fichiers où développer [la configuration du timer](#aide_led), [la mise en forme](#aide_horloge) et [la configuration](#aide_conf_horloge) de l'horloge.
 - `lib_LCD.c` et `lib_LCD.h` : Fichiers où développer [la bibliothèque LCD](#aide_lib_lcd).
