@@ -108,7 +108,7 @@ Compléments sur le rapport :
 ***Nota bene.*** :
 1. Le code source doit compiler !
 2. La note qui vous sera attribuée sur ce module tient également compte du travail observé durant les séances de TP + projet et des éventuelles absences non justifiées.
-3. Le [plagiat](https://www.bordeaux-inp.fr/extranet/fr/system/files/users/mhans100p/charte_plagiat_0.pdf) constitue une fraude dont les conséquences peuvent être graves :
+3. Le [plagiat](https://nuxeo.ipb.fr/nuxeo/nxfile/default/fa82b9dd-f22c-4d41-8ace-5a5e7fa7e60d/blobholder:0/Charte-anti-plagiat.pdf) constitue une fraude dont les conséquences peuvent être graves :
 attribution d’une note de zéro au travail incriminé, exclusion de l’établissement, exclusion définitive de tout établissement d’enseignement supérieur français.  
 En matière de propriété intellectuelle, le plagiat constitue un délit.
 
