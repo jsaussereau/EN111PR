@@ -2,12 +2,14 @@
 
 ## Télécharger l'archive
 
-Exécuter dans un terminal :
+- Exécuter dans un terminal :
 
 ```bash
 cd ~/Documents/
 git clone https://github.com/jsaussereau/EN111PR.git
 ```
+
+- Le dossier `EN111PR` devrait être apparu sur votre session dans le dossier `Documents`
 
 <details>
 <summary>Solution alternative</summary>
