@@ -9,10 +9,13 @@ cd ~/Documents/
 git clone https://github.com/jsaussereau/EN111PR.git
 ```
 
-**ou**
+<details>
+<summary>Solution alternative</summary>
 
 - Cliquer [ici](https://github.com/jsaussereau/EN111PR/archive/refs/heads/main.zip) pour télécharger l'archive.
 - Extraire l'archive sur la session dans **Documents**.
+
+</details>
 
 ## Organisation du répertoire
 Il y a 3 dossiers principaux :
@@ -132,7 +135,7 @@ Plusieurs fichiers sont déjà créés dans le dossier `src` (voir "Header Files
 
 Nous avons ici une exigence de précision, alors comme en TP, c'est la stratégie par interruption qui s'impose face à l'attente active.
 
-Pour génerer les interruptions qui ferront clignoter la LED, nous avons le choix entre les 3 timers du microcontrôleur. La datasheet nous apprend qu'il est possible de configurer le Timer 1 sur une horloge externe. La carte PICDEM2+ intègre un quartz de 32,768 kHz relié aux broches OSO (RC0) et OSI (RC1) du PIC. Ceci permet une incrémentation du Timer 1 à cette fréquence, et ainsi un débordement de celui-ci toutes les 2 secondes (2^16 / 32768) très précisément. Le Timer 1 est donc un bon candidat pour cette application.
+Pour génerer les interruptions qui ferront clignoter la LED, nous avons le choix entre les 3 timers du microcontrôleur. La datasheet nous apprend qu'il est possible de configurer le Timer 1 sur une horloge externe. La carte PICDEM2+ intègre un quartz de 32.768 kHz relié aux broches OSO (RC0) et OSI (RC1) du PIC. Ceci permet une incrémentation du Timer 1 à cette fréquence, et ainsi un débordement de celui-ci toutes les 2 secondes (2^16 / 32768) très précisément. Le Timer 1 est donc un bon candidat pour cette application.
 
 #### 2.2 Développement d'une bibliothèque pour le Timer 1
 
