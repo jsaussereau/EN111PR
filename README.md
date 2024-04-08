@@ -2,15 +2,17 @@
 
 ## Télécharger l'archive
 
-- Cliquer [ici](https://github.com/jsaussereau/EN111PR/archive/refs/heads/main.zip) pour télécharger l'archive.
-- Extraire l'archive sur la session dans **Documents**.
-
-ou dans un terminal :
+Exécuter dans un terminal :
 
 ```bash
 cd ~/Documents/
 git clone https://github.com/jsaussereau/EN111PR.git
 ```
+
+**ou**
+
+- Cliquer [ici](https://github.com/jsaussereau/EN111PR/archive/refs/heads/main.zip) pour télécharger l'archive.
+- Extraire l'archive sur la session dans **Documents**.
 
 ## Organisation du répertoire
 Il y a 3 dossiers principaux :
