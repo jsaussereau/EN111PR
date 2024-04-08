@@ -68,8 +68,7 @@ Il y a 3 dossiers principaux :
 
 ## Évaluation
 Le rendu se fait par mail avec comme objet `[EN111] NOM1 NOM2`, avant le (*date à définir*), à l'adresse suivante :
-- Groupes D et G : [jsaussereau@bordeaux-inp.fr](mailto:jsaussereau@bordeaux-inp.fr?subject=[EN111]%20NOM1%20NOM2)
-- Groupe E : [clemence.gillet@bordeaux-inp.fr](mailto:clemence.gillet@bordeaux-inp.fr?subject=[EN111]%20NOM1%20NOM2)
+- Groupes D, E et G : [jsaussereau@bordeaux-inp.fr](mailto:jsaussereau@bordeaux-inp.fr?subject=[EN111]%20NOM1%20NOM2)
 - Groupe F : [valery.lebret@enseirb-matmeca.fr](mailto:Valery.Lebret@enseirb-matmeca.fr?subject=[EN111]%20NOM1%20NOM2)
 
 Sont à rendre:
