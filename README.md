@@ -111,10 +111,10 @@ Compléments sur le rapport :
 - Même si vous n'avez pas réalisé une partie, vous pouvez l'indiquer et expliquer comment vous auriez fait.
 - Bon courage ;)
 
-***Nota bene.*** :
-1. Le code source doit compiler !
-2. La note qui vous sera attribuée sur ce module tient également compte du travail observé durant les séances de TP + projet et des éventuelles absences non justifiées.
-3. Le [plagiat](https://nuxeo.ipb.fr/nuxeo/nxfile/default/fa82b9dd-f22c-4d41-8ace-5a5e7fa7e60d/blobholder:0/Charte-anti-plagiat.pdf) constitue une fraude dont les conséquences peuvent être graves :
+> [!IMPORTANT]  
+> 1. Le code source doit compiler !
+> 2. La note qui vous sera attribuée sur ce module tient également compte du travail observé durant les séances de TP + projet et des éventuelles absences non justifiées.
+> 3. Le [plagiat](https://nuxeo.ipb.fr/nuxeo/nxfile/default/fa82b9dd-f22c-4d41-8ace-5a5e7fa7e60d/blobholder:0/Charte-anti-plagiat.pdf) constitue une fraude dont les conséquences peuvent être graves :
 attribution d’une note de zéro au travail incriminé, exclusion de l’établissement, exclusion définitive de tout établissement d’enseignement supérieur français.  
 En matière de propriété intellectuelle, le plagiat constitue un délit.
 
@@ -143,11 +143,11 @@ Pour génerer les interruptions qui ferront clignoter la LED, nous avons le choi
 
 La section "Timer1" de la datasheet du microcontrôleur *DS_PIC16F877A* détaille le fonctionnement de ce timer, avec notamment un schéma de son fonctionnement et un tableau regroupant les registres à utiliser pour le configurer.
 
-On cherche ensuite à définir à l'aide `#define` dans `timer.h` (Header Files) les différentes valeurs des champs associés au Timer 1. Cela permettra d'avoir juste à choisir la bonne constante lors de la configuration du timer.
+On cherche tout d'abord à définir à l'aide de `#define` dans `timer.h` (Header Files) les différentes valeurs des champs associés au Timer 1. Cela permettra d'avoir juste à choisir la bonne constante lors de la configuration du timer.
 
 En plus de faciliter l'étape de configuration, l'objectif est que par la suite chaque ligne de code soit compréhensible sans avoir à regarder la datasheet.
 
-#### Exemple de ce qu'il **ne faut pas** faire :
+#### Exemple de ce qu'il **ne faut PAS** faire :
 `timer.c`
 ```c
 void timer_init() {
@@ -157,7 +157,8 @@ void timer_init() {
 La notation est compacte mais on ne comprend rien à ce qu'il se passe... 
 Sans la datasheet sous les yeux et un effort de compréhension (avec risque d'erreur), impossible de savoir à quelle configuration correspond cette valeur. 
 
-Dans le milieu professionnel, les codes sont écrits par plusieurs personnes et doivent pouvoir être repris par n'importe qui dans le futur. Il donc est impensable de produire un tel code en entreprise.
+> [!NOTE]  
+> Dans le milieu professionnel, les codes sont écrits par plusieurs personnes et doivent pouvoir être repris par n'importe qui dans le futur. Il donc est impensable de proposer un tel code en entreprise.
 
 #### Exemple de notation bien plus lisible :
 `timer.h`
@@ -185,8 +186,15 @@ De plus, les commentaires sont un bon moyen de se rappeler pourquoi on a fait te
 
 Il ne reste plus qu'à utiliser ces définitions pour l'initialisation du timer dans la fonction `timer_init` (`timer.c`).
 
-La section `TIMER1 MODULE` de la datasheet *DS_PIC16F877A* décrit le fonctionnement du Timer1. Le tableau à la page 60 met en évidence tous les champs liés au Timer1. Pour être sûr de l'avoir bien configuré, il faut être sûr de **comprendre** quel est le rôle de chacun de ces champs et être sûr d'avoir assigné la bonne valeur aux champs qui en ont besoin. Le schéma page 58 aide à comprendre le rôle de chaque champ.
-Une fois le timer configuré, on veut déclencher une interruption à chaque débordement. Le schéma page 153 permet de visualiser les conditions à remplir pour qu'une interruption se déclenche. 
+L'objectif étant dans un premier temps de le configurer pour qu'il déclenche une iterruption toutes les deux secondes.
+
+La section `TIMER1 MODULE` de la datasheet *DS_PIC16F877A* décrit le fonctionnement du Timer1. Le schéma page 58 aide à comprendre son fonctionnement et le rôle de chaque champ de configuration.
+> [!TIP]  
+> Le tableau à la page 60 de la datasheet *DS_PIC16F877A* met en évidence tous les champs liés au Timer1. Pour être sûr de l'avoir bien configuré, il faut être sûr de comprendre quel est le rôle de chacun de ces champs et être sûr d'avoir assigné la bonne valeur aux champs qui en ont besoin.
+
+Une fois le timer configuré, on veut déclencher une interruption à chaque débordement. 
+> [!TIP]  
+> Le schéma page 153 permet de visualiser les conditions à remplir pour qu'une interruption se déclenche. 
 
 #### 2.4 Configuration du module CCP
 
@@ -197,7 +205,8 @@ Il faut aussi penser à bien mettre une valeur à comparer.
 
 Comme pour la configuration du timer, la configuration du module CCP se fera a l'aide de constantes définies au préalable.
 
-***Note*** : Le tableau à la page 68 de la datasheet *DS_PIC16F877A* met en évidence tous les champs liés au module CCP. Pour être sûr de l'avoir bien configuré, il faut être sûr de comprendre quel est le rôle de chacun de ces champs et être sûr d'avoir assigné la bonne valeur aux champs qui en ont besoin.
+> [!TIP]  
+> Le tableau à la page 68 de la datasheet *DS_PIC16F877A* met en évidence tous les champs liés au module CCP. Pour être sûr de l'avoir bien configuré, il faut être sûr de comprendre quel est le rôle de chacun de ces champs et être sûr d'avoir assigné la bonne valeur aux champs qui en ont besoin.
 
 
 <h3 id="aide_lib_lcd"> 3. Développement de la bibliothèque pour l'afficheur LCD </h3>
@@ -255,7 +264,8 @@ Une autre méthode, plus pratique à utiliser, se base sur le même principe d'[
 
 Comme dans le fichier d'include, on peut donner plusieurs définitions aux [bitfields](https://www.tutorialspoint.com/cprogramming/c_bit_fields.htm) grâce aux [unions](https://www.tutorialspoint.com/cprogramming/c_unions.htm). On peut par exemple nommer les bits un à un, et, plus intéressant, définir des champs. Cela rend les lectures/écritures très simples.  
 
-***Note*** : L'ordre des bits dans les champs de bits n'est hélas pas normé, il dépend du compilateur et de l'architecture. Sur PIC, avec le compilateur XC8, le bit de poids faible (LSB) est en premier et le bit de poids fort (MSB) est en dernier.
+> [!NOTE]  
+> L'ordre des bits dans les champs de bits n'est hélas pas normé, il dépend du compilateur et de l'architecture. Sur PIC, avec le compilateur XC8, le bit de poids faible (LSB) est en premier et le bit de poids fort (MSB) est en dernier.
 
 ***Exemple*** :
 
@@ -333,7 +343,8 @@ void lcd_write_instr_4bits(uint8_t rs, uint8_t rw, uint8_t data_4bits) {
     // on écrit les 4 bits de la donnée
 }
 ```
-***Note*** : Pour faire des temporisations on peut utiliser les macros `__delay_us(unsigned int t)` et `__delay_ms(unsigned int t)`. Il s'agit de boucles qui utilisent le paramètre `_XTAL_FREQ` (fréquence de l'oscilateur) pour faire des délais. Il faudra donc penser à le définir :
+> [!TIP]  
+> Pour faire des temporisations on peut utiliser les macros `__delay_us(unsigned int t)` et `__delay_ms(unsigned int t)`. Il s'agit de boucles qui utilisent le paramètre `_XTAL_FREQ` (fréquence de l'oscilateur) pour faire des délais. Il faudra donc penser à le définir :
 ```c
 #define _XTAL_FREQ XXXXXXX // remplacer par la valeur
 ```
@@ -359,7 +370,8 @@ void lcd_write_instr_8bits(uint8_t rs, uint8_t rw, uint8_t data_8bits) {
 ```
 
 
-***Note*** : Avant d'envoyer une commande il faut s'assurer que le module n'est pas occupé à exécuter la commande précédente. Sinon la commande envoyée ne sera pas exécutée. 
+> [!TIP]  
+> Avant d'envoyer une commande il faut s'assurer que le module n'est pas occupé à exécuter la commande précédente. Sinon la commande envoyée ne sera pas exécutée. 
 Il est possible de lire le bit 'busy' pour cela, avec la commande correspondante. Mais dans un souci de simplicité, dans un premier temps, on peut se contenter d'une temporisation de quelques millisecondes pour s'assurer.
 
 
@@ -381,9 +393,9 @@ Pour générer la donnée de la commande avec les bons arguments, il sera pour c
 La page 11 de la datasheet du module LCD *DS_Afficheurs_Sunplus* détaille la procédure d'initialisation du module.
 Plutôt que d'envoyer les commandes avec les données brutes dans cette procédure, il est préférable de comprendre ce que fait chacune d'entre elles. Ainsi, on remarque qu'une grande partie de la procédure d'initialisation peut être réalisée en effectuant des appels aux fonctions définies plus haut.
 
-***Note*** : 
-- Penser à l'alimentation du module (*cf.* datasheet de la carte PICDEM2+).
-- Penser aux ports du microcontrôleur qui ont été utilisés... Ont-ils bien été définis comme entrée/sortie ?
+> [!TIP]  
+> - Penser à l'alimentation du module (*cf.* datasheet de la carte PICDEM2+).
+> - Penser aux ports du microcontrôleur qui ont été utilisés... Ont-ils bien été définis comme entrée/sortie ?
 
 #### <ins>Étape 5</ins> : Développement des fonctions utilisateur restantes
 
