@@ -137,7 +137,14 @@ Plusieurs fichiers sont déjà créés dans le dossier `src` (voir "Header Files
 
 Nous avons ici une exigence de précision, alors comme en TP, c'est la stratégie par interruption qui s'impose face à l'attente active.
 
-Pour génerer les interruptions qui ferront clignoter la LED, nous avons le choix entre les 3 timers du microcontrôleur. La datasheet nous apprend qu'il est possible de configurer le Timer 1 sur une horloge externe. La carte PICDEM2+ intègre un quartz de 32.768 kHz relié aux broches OSO (RC0) et OSI (RC1) du PIC. Ceci permet une incrémentation du Timer 1 à cette fréquence, et ainsi un débordement de celui-ci toutes les 2 secondes (2^16 / 32768) très précisément. Le Timer 1 est donc un bon candidat pour cette application.
+Pour génerer les interruptions qui ferront clignoter la LED, nous avons le choix entre les 3 timers du microcontrôleur. 
+
+La datasheet *DS_PIC16F877A* nous apprend qu'il est possible de configurer le Timer 1 sur une horloge externe. 
+Le schéma à la page 19 de la datasheet de la carte PICDEM2+ *DS_PICDEM_2_Plus_Users_Guide* montre qu'il y a un quartz (Y3) de 32.768 kHz ($2^{15}$ Hz) relié aux broches OSO (RC0) et OSI (RC1) du PIC. 
+
+> [!TIP]
+> L'incrémentation d'un compteur 16 bits comme le Timer 1 à une fréquence de $2^{15}$ Hz permettrait un débordement de celui-ci toutes les 2 secondes ($2^{16} / 2^{15}$) très précisément. 
+> Le Timer 1 est donc un bon candidat pour cette application.
 
 ### 2.2 Développement d'une bibliothèque pour le Timer 1
 
@@ -178,9 +185,14 @@ void timer_init() {
 	T1CONbits.T1OSCEN = ...;
 }
 ```
-Cette notation demande un effort supplémentaire lors de l'écriture du programme mais rendra le débuggage et la modification tellement plus facile. Ici, même sans la datasheet, on comprend ce qu'il se passe.
 
-De plus, les commentaires sont un bon moyen de se rappeler pourquoi on a fait tel ou tel choix.
+L'exemple ci dessus met en oeuvre plusieurs bonnes pratiques :
+- L'initialisation des champs indépendaments les uns des autres plutôt que d'écrire sur tout le registre : le code est plus simple à comprendre et à modifier.
+- L'utilisation de constantes avec des noms signifiants : permet de comprendre facilement quel est le rôle de la valeur qui a été mise dans le champs.
+
+> [!NOTE]  
+> Cette notation demande un effort supplémentaire lors de l'écriture du programme mais rendra le débuggage et la modification tellement plus facile. Ici, même sans la datasheet, on comprend ce qu'il se passe.
+> De plus, les commentaires sont un bon moyen de se rappeler pourquoi on a fait tel ou tel choix.
 
 ### 2.3 Configuration du timer
 
@@ -202,7 +214,7 @@ Une fois le timer configuré, on veut déclencher une interruption à chaque dé
 ### 2.4 Configuration du module CCP
 
 Pour avoir un débordement toutes les secondes (et plus toutes les 2 secondes), on peut utiliser un module de comparaison CCP.  
-Le but est ici d'utiliser ce module pour générer une interruption à chaque fois que la valeur du compteur du Timer1 est à mi-parcours (entre deux interruptions de débordement). Il faut donc également activer les interruptions sur module CCP.  
+Le but est ici d'utiliser ce module pour générer une interruption à chaque fois que la valeur du compteur du Timer1 est à mi-parcours (entre deux interruptions de débordement). Il faut donc également activer les interruptions sur le module CCP.  
 
 Les modules CCP peuvent être utilisés dans différentes configurations, il faut choisir la plus adaptée au besoin.  
 Il faut aussi penser à bien mettre une valeur à comparer.
@@ -224,8 +236,9 @@ Pour développer la bibliothèque LCD, 2 documents seront utiles :
 
 Pour envoyer des instructions, il faut être capable d'accéder individuellement aux différents champs du port D qui contrôlent l'écran LCD. Il est notamment nécessaire d'écrire sur les 4 bits de données sans modifier les autres bits du port.
 
-Avant toute chose, il est donc vivement recommandé de simplifier les lectures/écritures sur les différents champs du module LCD.  
-Deux principales méthodes sont présentées ici. Prenez le temps de prendre connaissance des deux, et faite votre choix !
+> [!TIP]
+> Avant toute chose, il est donc vivement recommandé de simplifier les lectures/écritures sur les différents champs du module LCD.  
+> Deux approches sont présentées ici.
 
 #### Méthode 1 : Masquage
 <details>
@@ -327,10 +340,11 @@ Maintenant que les accès aux différents champs associés au module LCD sont pl
 
 La datasheet du module LCD *DS_Afficheurs_Sunplus* nous apprend que l'on peut câbler ce module LCD à un microcontrôleur sur 8 bits (DB7-DB0) ou 4 bits (DB7-DB4)
 
-Comme on peut le voir dans la datasheet de la carte PICDEM2+, le bus de données est ici utilisé sur 4 bits.
+> [!TIP]
+> Le schéma à la page 19 de la datasheet de la carte PICDEM2+ *DS_PICDEM_2_Plus_Users_Guide* montre comment le module LCD est relié au microcontrôleur. On voit que le bus de données est ici utilisé sur 4 bits.
 
-Cela n'a pas d'impact sur la taille des commandes que l'on peut envoyer. En effet, même lorsqu'il est cablé sur 4 bits, l'afficheur LCD peut recevoir des commandes avec des données de 4 bits ou bien 8 bits. C'est le protocole de communication qui change.
-
+> [!NOTE]
+> Cela n'a pas d'impact sur la taille des commandes que l'on peut envoyer. En effet, même lorsqu'il est cablé sur 4 bits, l'afficheur LCD peut recevoir des commandes avec des données de 4 bits ou bien 8 bits. C'est le protocole de communication qui change.
 
 On va donc développer des fonctions pour ces deux cas :
 
@@ -339,7 +353,8 @@ Dans la datasheet du module LCD *DS_Afficheurs_Sunplus* on voit que pour la part
 
 C'est le cas le plus simple : on écrit 4 bits de données sur un bus de 4 bits.
 
-Pour envoyer ces données, il faut veiller à respecter les chronogrammes à la page 24 de la datasheet *DS_Afficheurs_Sunplus*. 
+> [!IMPORTANT]
+> Pour envoyer ces données, il faut veiller à respecter les chronogrammes à la page 24 de la datasheet *DS_Afficheurs_Sunplus*. 
 
 ```c
 void lcd_write_instr_4bits(uint8_t rs, uint8_t rw, uint8_t data_4bits) {
@@ -356,14 +371,17 @@ Il faudra aussi se poser la question des délais les plus courts, au vu de la p�
 
 #### ➤ Commandes 8 bits :
 
-Dans le tableau récapitulatif des commandes du module LCD dans la datasheet *DS_Afficheurs_Sunplus*, on voit que les autres commandes ont une donnée sur 8 bits de données et, comme en mode 4 bits, 2 bits de contrôle.
+Dans le tableau récapitulatif des commandes du module LCD dans la datasheet *DS_Afficheurs_Sunplus*, on voit que les autres commandes sont composées d'une donnée sur 8 bits et, comme en mode 4 bits, 2 bits de contrôle.
 
 On repart donc sur la même base qu'en mode 4 bits.
+La différence est qu'il faut être capable d'envoyer 8 bits de données sur un bus de 4 bits. 
 
-La différence est qu'il faut être capable d'envoyer 8 bits de données sur un bus de 4 bits. Pour cela, pas le choix, il faut envoyer les données en 2 fois.
-Il faut donc faire des [opérations binaires](https://dept-info.labri.fr/ENSEIGNEMENT/programmation1/cours/CM_9___Manipulation_binaire.pdf) afin de séparer les 4 bits de poids fort des 4 bits de poids faible.
+> [!TIP]
+> Pour envoyer 8 bits de données sur un bus de 4 bits, pas le choix, il faut envoyer les données en 2 fois.
+> Il faut donc faire des [opérations binaires](https://dept-info.labri.fr/ENSEIGNEMENT/programmation1/cours/CM_9___Manipulation_binaire.pdf) afin de séparer les 4 bits de poids fort des 4 bits de poids faible.
 
-Le protocole exige d'envoyer les bits de poids fort en premier.
+> [!IMPORTANT]
+> Le protocole exige d'envoyer les bits de poids fort en premier.
 
 ```c
 void lcd_write_instr_8bits(uint8_t rs, uint8_t rw, uint8_t data_8bits) {
@@ -395,9 +413,12 @@ Pour générer la donnée de la commande avec les bons arguments, il sera pour c
 
 ### <ins>Étape 4</ins> : Développement de la fonction d'initialisation
 La page 11 de la datasheet du module LCD *DS_Afficheurs_Sunplus* détaille la procédure d'initialisation du module.
-Plutôt que d'envoyer les commandes avec les données brutes dans cette procédure, il est préférable de comprendre ce que fait chacune d'entre elles. Ainsi, on remarque qu'une grande partie de la procédure d'initialisation peut être réalisée en effectuant des appels aux fonctions définies plus haut.
 
 > [!TIP]  
+> Plutôt que d'envoyer les commandes avec les données brutes dans cette procédure, il est préférable de comprendre ce que fait chacune d'entre elles.
+> Ainsi, on remarque qu'une grande partie de la procédure d'initialisation peut être réalisée en effectuant des appels aux fonctions définies plus haut.
+
+> [!IMPORTANT]  
 > - Penser à l'alimentation du module (*cf.* datasheet de la carte PICDEM2+).
 > - Penser aux ports du microcontrôleur qui ont été utilisés... Ont-ils bien été définis comme entrée/sortie ?
 
@@ -414,7 +435,7 @@ Il ne manque alors plus qu'à réaliser les fonctions :
 Maintenant que l'on peut afficher ce que l'on veut sur écran, on cherche à afficher l'horloge.
 On utilise donc la fonction d'interruption (déclenchée toutes les secondes grâce à la configuration du timer) pour générer les heures, minutes et secondes qui seront affichés sur l'écran.
 
-> [!NOTE]  
+> [!TIP]  
 > Comme toujours en programmation microcontroleur, bien réfléchir à ce qui doit être fait dans la fonction d'interruption et ce qui doit être fait ailleurs...
 
 Pour formatter l'horloge dans une chaîne de caractère, le plus simple est certainement d'utiliser la fonction `sprintf` de la bibliothèque `stdio`.
