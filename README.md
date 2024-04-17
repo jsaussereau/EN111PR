@@ -409,7 +409,8 @@ Notamment les suivantes :
 - `Cursor or Display Shift `
 - `Function Set `
 
-Pour générer la donnée de la commande avec les bons arguments, il sera pour certaines fonctions nécessaire d'effectuer des [opérations binaires](https://dept-info.labri.fr/ENSEIGNEMENT/programmation1/cours/CM_9___Manipulation_binaire.pdf).
+> [!TIP]
+> Pour générer la donnée de la commande avec les bons arguments, il sera nécessaire pour certaines fonctions d'effectuer des [opérations binaires](https://dept-info.labri.fr/ENSEIGNEMENT/programmation1/cours/CM_9___Manipulation_binaire.pdf).
 
 ### <ins>Étape 4</ins> : Développement de la fonction d'initialisation
 La page 11 de la datasheet du module LCD *DS_Afficheurs_Sunplus* détaille la procédure d'initialisation du module.
