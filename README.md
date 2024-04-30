@@ -347,14 +347,16 @@ La datasheet du module LCD *DS_Afficheurs_Sunplus* nous apprend que l'on peut c�
 > Cela n'a pas d'impact sur la taille des commandes que l'on peut envoyer. En effet, même lorsqu'il est cablé sur 4 bits, l'afficheur LCD peut recevoir des commandes avec des données de 4 bits ou bien 8 bits. C'est le protocole de communication qui change.
 
 On va donc développer des fonctions pour ces deux cas :
+- `lcd_write_instr_4bits` : envoi d'une commande avec 4 bits de données (pour les premières commandes de l'initialisation)
+- `lcd_write_instr_8bits` : envoi d'une commande avec 8 bits de données (pour toutes les commandes classiques)
+
+> [!IMPORTANT]
+> Dans les deux cas, pour envoyer ces données, il faut veiller à respecter les chronogrammes à la page 24 de la datasheet *DS_Afficheurs_Sunplus*. 
 
 #### ➤ Commandes 4 bits :
 Dans la datasheet du module LCD *DS_Afficheurs_Sunplus* on voit que pour la partie d'initialisation, il y a des commandes avec une données de 4 bits et 2 bits de contrôle.
 
 C'est le cas le plus simple : on écrit 4 bits de données sur un bus de 4 bits.
-
-> [!IMPORTANT]
-> Pour envoyer ces données, il faut veiller à respecter les chronogrammes à la page 24 de la datasheet *DS_Afficheurs_Sunplus*. 
 
 ```c
 void lcd_write_instr_4bits(uint8_t rs, uint8_t rw, uint8_t data_4bits) {
@@ -366,12 +368,15 @@ void lcd_write_instr_4bits(uint8_t rs, uint8_t rw, uint8_t data_4bits) {
 > Pour faire des temporisations on peut utiliser les macros dans la bibliothèque `pic.h` (déjà importée par `xc.h`) :
 > - `__delay_us(unsigned int t)` : délai en microsecondes
 > - `__delay_ms(unsigned int t)` : délai en millisecondes
->   
-> Il s'agit de boucles qui utilisent le paramètre `_XTAL_FREQ` (fréquence de l'oscilateur du microcontrôleur) pour faire des délais. Il faudra donc penser à le définir :
+
+`__delay_us` et `__delay_ms` sont implémentées sous forme de boucles qui utilisent le paramètre `_XTAL_FREQ` (fréquence de l'oscilateur du microcontrôleur) pour faire des délais. Il faudra donc penser à le définir :
 ```c
-#define _XTAL_FREQ XXXXXXX // remplacer XXXXXXX par la fréquence
+#define _XTAL_FREQ XXXXXXX // remplacer XXXXXXX par la fréquence du microcontroleur
 ```
-Il faudra aussi se poser la question des délais les plus courts, au vu de la période l'horloge du microcontrôleur et sachant qu'une instruction assembleur s'exécute en 4 cycles d'horloge...
+
+> [!NOTE]  
+> Il faudra aussi se poser la question de la pertinence des délais les plus courts, au vu de la période l'horloge du microcontrôleur et sachant qu'une instruction assembleur s'exécute en 4 cycles d'horloge...
+> Combien de temps s'écoule-t-il entre la fin de l'exécution d'une instruction et la fin de l'exécution de la suivante ?
 
 #### ➤ Commandes 8 bits :
 
@@ -395,7 +400,7 @@ void lcd_write_instr_8bits(uint8_t rs, uint8_t rw, uint8_t data_8bits) {
 }
 ```
 
-#### lcd_busy :
+#### ➤ lcd_busy :
 Avant d'envoyer une commande il faut s'assurer que le module n'est pas occupé à exécuter la commande précédente. Sinon la commande envoyée ne sera pas exécutée. 
 
 > [!TIP]  
@@ -414,6 +419,10 @@ Notamment les suivantes :
 - `Display ON/OFF Control `
 - `Cursor or Display Shift `
 - `Function Set `
+  
+> [!TIP]
+> Ces commandes sont caractérisées par 3 valeurs : `rs`, `rw` et une donnée de 8 bits.
+> Ce sont justement les paramètres de la foncton `lcd_write_instr_8bits` décrite plus tôt.
 
 > [!TIP]
 > Pour générer la donnée de la commande avec les bons arguments, il sera nécessaire pour certaines fonctions d'effectuer des [opérations binaires](https://dept-info.labri.fr/ENSEIGNEMENT/programmation1/cours/CM_9___Manipulation_binaire.pdf).
@@ -428,6 +437,10 @@ La page 11 de la datasheet du module LCD *DS_Afficheurs_Sunplus* détaille la pr
 > [!IMPORTANT]  
 > - Penser à l'alimentation du module (*cf.* datasheet de la carte PICDEM2+).
 > - Penser aux ports du microcontrôleur qui ont été utilisés... Ont-ils bien été définis comme entrée/sortie ?
+
+> [!NOTE]  
+> À ce stade on peut tester si tout fonctionne. Pour cela, on peut ajouter un appel à `lcd_display_control` avec les bons paramètres pour allumer l'écran et faire clignoter le curseur.
+> Ainsi, si après avoir téléversé le programme sur la carte, le curseur clignote sur l'écran, les étapes précédentes sont validées !
 
 ### <ins>Étape 5</ins> : Développement des fonctions utilisateur restantes
 
@@ -457,27 +470,30 @@ Exemple :
 char formatted_time[STRING_LENGTH]; // STRING_LENGTH: nombre de caractères après formatage + 1 (pour le '\0' de fin de chaîne)
 sprintf(formatted_time, "%d:%d:%d", t.hours, t.minutes, t.seconds);
 ```
-Resultat : `12:1:8`
+Résultat : `12:1:8`
 
 Comme `printf`, on peut forcer une mise en forme sur un nombre précis de charactères :
 ```c
 sprintf(formatted_time, "%2d:%2d:%2d", t.hours, t.minutes, t.seconds);
 ```
-Resultat : `12: 1: 8`
+Résultat : `12: 1: 8`
 
 De même, on peut forcer l'affichage des 0 :
 ```c
 sprintf(formatted_time, "%02d:%02d:%02d", t.hours, t.minutes, t.seconds);
 ```
-Resultat : `12:01:08`
+Résultat : `12:01:08`
 
 <h2 id="aide_conf_horloge"> 5. Développement de la fonctionnalité de configuration de l'horloge </h2>
 
-Pour cette partie, il est nécessaire de développer une machine d'état, avec une filtre anti-rebond (à base de temporisation active) sur les boutons. 
-L'objectif est de pouvoir configurer l'horloge à l'aide des boutons poussoir S2 et S3 :
+L'objectif de cette partie est de pouvoir configurer l'horloge à l'aide des boutons poussoir S2 et S3 :
 - Un appui prolongé d'au moins 2 s sur S2 fera clignoter les heures, celles-ci s'incrémenteront à chaque appui sur S3, ou automatiquement (f ≈ 5 Hz) en cas d'appui maintenu au-delà de 2 s.
 - Un nouvel appui sur S2 permettra un réglage des minutes selon la même procédure.
 - Éventuellement, un nouvel appui sur S2 permettra un réglage des secondes selon la même procédure.
 - Un dernier appui sur S2 fera quitter le mode "réglage".
 
-Une amélioration de cette fonctionnalité de configuration est d'utiliser le potentiomètre de la carte au lieu du bouton S3 (bonus).
+> [!TIP]  
+> Un bonne approche est de développer une machine d'état, avec une filtre anti-rebond (à base de temporisation active) sur les boutons. 
+
+> [!NOTE]  
+> Une amélioration de cette fonctionnalité de configuration est d'utiliser le potentiomètre de la carte au lieu du bouton S3 (bonus).
