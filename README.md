@@ -363,7 +363,11 @@ void lcd_write_instr_4bits(uint8_t rs, uint8_t rw, uint8_t data_4bits) {
 }
 ```
 > [!TIP]  
-> Pour faire des temporisations on peut utiliser les macros `__delay_us(unsigned int t)` et `__delay_ms(unsigned int t)`. Il s'agit de boucles qui utilisent le paramètre `_XTAL_FREQ` (fréquence de l'oscilateur) pour faire des délais. Il faudra donc penser à le définir :
+> Pour faire des temporisations on peut utiliser les macros dans la bibliothèque `pic.h` (déjà importée par `xc.h`) :
+> - `__delay_us(unsigned int t)` : délai en microsecondes
+> - `__delay_ms(unsigned int t)` : délai en millisecondes
+>   
+> Il s'agit de boucles qui utilisent le paramètre `_XTAL_FREQ` (fréquence de l'oscilateur du microcontrôleur) pour faire des délais. Il faudra donc penser à le définir :
 ```c
 #define _XTAL_FREQ XXXXXXX // remplacer XXXXXXX par la fréquence
 ```
@@ -391,10 +395,12 @@ void lcd_write_instr_8bits(uint8_t rs, uint8_t rw, uint8_t data_8bits) {
 }
 ```
 
+#### lcd_busy :
+Avant d'envoyer une commande il faut s'assurer que le module n'est pas occupé à exécuter la commande précédente. Sinon la commande envoyée ne sera pas exécutée. 
 
 > [!TIP]  
-> Avant d'envoyer une commande il faut s'assurer que le module n'est pas occupé à exécuter la commande précédente. Sinon la commande envoyée ne sera pas exécutée. 
-Il est possible de lire le bit 'busy' pour cela, avec la commande correspondante. Mais dans un souci de simplicité, dans un premier temps, on peut se contenter d'une temporisation de quelques millisecondes.
+> Pour savoir si la précédente commande a fini d'être exécutée, il est possible de lire le bit 'busy', avec la commande correspondante.
+> Cependant, dans un premier temps, par souci de simplicité, on peut se contenter d'une temporisation. Sa durée doit à être supérieure au temps d'exécution de la commande la plus longue (cf. *DS_Afficheurs_Sunplus*).
 
 
 ### <ins>Étape 3</ins> : Développement des fonctions correspondant aux différentes commandes
