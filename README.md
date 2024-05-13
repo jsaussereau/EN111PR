@@ -489,7 +489,7 @@ Résultat : `12:01:08`
 ### Rappel du cahier des charges
 
 L'objectif de cette partie est de pouvoir configurer l'horloge à l'aide des boutons poussoir S2 et S3 :
-- Un appui prolongé d'au moins 2 s sur S2 fera clignoter les heures, celles-ci s'incrémenteront à chaque appui sur S3, ou automatiquement (f ≈ 5 Hz) en cas d'appui maintenu au-delà de 2 s.
+- Un appui prolongé d'au moins 2 s sur S2 fera clignoter les heures, celles-ci s'incrémenteront à chaque appui sur S3, et automatiquement (f ≈ 5 Hz) en cas d'appui maintenu au-delà de 2 s.
 - Un nouvel appui sur S2 permettra un réglage des minutes selon la même procédure.
 - Éventuellement, un nouvel appui sur S2 permettra un réglage des secondes selon la même procédure.
 - Un dernier appui sur S2 fera quitter le mode "réglage".
@@ -516,7 +516,7 @@ enum state_e {
 };
 
 void main() {
-    enum state_e state; // Déclaration de la variable contenant l'état
+    enum state_e state = ST_CLOSED; // Déclaration et initialisation de la variable contenant l'état
     while (1) {
         switch(state) {
             case ST_CLOSED:
