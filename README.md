@@ -498,13 +498,13 @@ L'objectif de cette partie est de pouvoir configurer l'horloge à l'aide des bou
 > Un bonne approche pour implémenter cette fonctionnalité est de développer une machine d'état.
 
 > [!TIP]
-> Les interrupteurs physiques ont une période de rebonds qui peut provoquer des faux déclenchements. Pour éviter des changements d'états non désirer un filtre anti-rebonds peut être implémenté à l'aide de délais de temporisation.
+> Les interrupteurs physiques ont une période de rebonds qui peut provoquer des faux déclenchements. Pour éviter des changements d'états non désirés, un filtre anti-rebonds peut être implémenté à l'aide de délais de temporisation.
 
 ### Machine d'état en C
 
 Le principe est le même que dans un langage de description matérielle comme le VHDL : représenter le comportement d'un système en réponse à des événements.
 
-Voici un exemple d'une machine d'état implémentant le système de contrôle d'une porte automatique.
+Voici un exemple de machine d'état implémentant le système de contrôle d'une porte automatique.
 
 ```c
 // Déclaration de l'enumération représentant les états
