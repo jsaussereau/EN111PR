@@ -511,12 +511,13 @@ Voici un exemple de machine d'état implémentant le système de contrôle d'une
 enum state_e {
     ST_CLOSED,
     ST_OPENED,
-    ST_CLOSING
-    ST_OPENING,
+    ST_CLOSING,
+    ST_OPENING
 };
 
+enum state_e state = ST_CLOSED; // Déclaration et initialisation de la variable contenant l'état
+
 void main() {
-    enum state_e state = ST_CLOSED; // Déclaration et initialisation de la variable contenant l'état
     while (1) {
         switch(state) {
             case ST_CLOSED:
