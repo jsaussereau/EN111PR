@@ -20,10 +20,10 @@
 
 /************************************************************************
                                 ETAPE 2
- Developpement de fonctions d'envoi de n'importe quelle instruction
+ Developpement de fonctions d'envoi de n'importe quelle commande
 ************************************************************************/
 
-/// \brief Envoi d'une instruction de 4 bits vers le module LCD 
+/// \brief Envoi d'une commande de 4 bits vers le module LCD 
 ///        (utile pour l'initialisation) 
 /// \param rs selectionne le registre de destination (1 bit)
 /// \param rw selectionne s'il s'agit d'une lecture ou d'une ecriture (1 bit)
@@ -32,7 +32,7 @@ void lcd_write_instr_4bits(uint8_t rs, uint8_t rw, uint8_t data_4bits) {
     
 }
 
-/// \brief Envoi d'une instruction de 8 bits vers le module LCD
+/// \brief Envoi d'une commande de 8 bits vers le module LCD
 /// \param rs selectionne le registre de destination (1 bit)
 /// \param rw selectionne s'il s'agit d'une lecture ou d'une ecriture (1 bit)
 /// \param data_8bits est la donnee a ecrire (8 bits)
@@ -48,11 +48,11 @@ void lcd_busy() {
 
 /************************************************************************
                                 ETAPE 3
- Developpement des fonctions correspondant aux differentes instructions
+ Developpement des fonctions correspondant aux differentes commandes
 ************************************************************************/
 
 // voir DS_Afficheurs_Sunplus.pdf p5, p6 et p7
-// chaque fonction correspond a une instruction de l'ecran LCD
+// chaque fonction correspond a une commande de l'ecran LCD
 
 /// \brief Effacement de l'ecran
 void lcd_clear() {
@@ -120,22 +120,14 @@ void lcd_putch(char c) {
 }
 
 /// \brief Ecriture d'une chaine de caracteres sur l'afficheur
-/// \param s est la chaine de carateres a envoyer
-void lcd_puts(const char *s) {
-    
-}
-
-/// \brief Deplacement du curseur de "amount" crans. 
-/// \param amount est l'offset a appliquer au curseur
-///        amount negatif = vers la gauche
-///        amount positif = vers la droite
-void lcd_shift_cursor(int8_t amount) {
+/// \param str est la chaine de carateres a envoyer
+void lcd_puts(const char *str) {
     
 }
 
 /// \brief Positionnement du curseur en (x,y). Origine en (1,1)
-/// \param pos est la position horizontale
-/// \param ligne est la position verticale
-void lcd_pos(uint8_t pos, uint8_t ligne) {
+/// \param column est la position horizontale
+/// \param line est la position verticale
+void lcd_pos(uint8_t column, uint8_t line) {
     
 }
