@@ -74,9 +74,7 @@ Il y a 3 dossiers principaux :
 
 
 # Évaluation
-Le rendu se fait par mail avec comme objet `[EN111] NOM1 NOM2`, avant le **26/05/2024, 23:59**, à l'adresse suivante :
-- Groupes D, E et G : [jsaussereau@bordeaux-inp.fr](mailto:jsaussereau@bordeaux-inp.fr?subject=[EN111]%20NOM1%20NOM2)
-- Groupe F : [valery.lebret@enseirb-matmeca.fr](mailto:Valery.Lebret@enseirb-matmeca.fr?subject=[EN111]%20NOM1%20NOM2)
+Le rendu se fait par mail avec comme objet `[EN111] NOM1 NOM2`, avant le *à définir*.
 
 Sont à rendre:
 - Le code source (tous les fichiers `.c` et `.h` dans le dossier `src`) compressés dans une archive `.zip`
