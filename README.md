@@ -415,7 +415,6 @@ Notamment les suivantes :
 - `Return Home ` 
 - `Entry Mode Set `
 - `Display ON/OFF Control `
-- `Cursor or Display Shift `
 - `Function Set `
   
 > [!TIP]
@@ -445,7 +444,6 @@ La page 11 de la datasheet du module LCD *DS_Afficheurs_Sunplus* détaille la pr
 Il ne manque alors plus qu'à réaliser les fonctions :
 - `lcd_putch` pour écrire un caractère 
 - `lcd_puts` pour écrire une chaîne de caractères 
-- `lcd_shift_cursor` pour pour déplacer le curseur 
 - `lcd_pos` pour le positionnement du curseur en un point de l'écran
 
 <h2 id="aide_horloge"> 4. Affichage de l'horloge sur l'écran LCD </h2>
